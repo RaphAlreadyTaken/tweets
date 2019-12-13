@@ -20,7 +20,7 @@ public class Main
 
         HashtagProcessor proc = new HashtagProcessor();
         proc.convertToHashtagMap(hits, field);
-        proc.annotateHashtags();
         proc.displayHashtagMap();
+        proc.writeHashtagsToFS();
     }
 }
