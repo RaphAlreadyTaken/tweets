@@ -2,6 +2,8 @@ package fr.ceri;
 
 import fr.ceri.entities.ElasticQuery;
 import fr.ceri.entities.HashtagProcessor;
+import fr.ceri.entities.WordProcessor;
+import fr.ceri.entities.WriterToFS;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.search.SearchHit;
 
@@ -12,15 +14,24 @@ public class Main
 {
     public static void main(String[] args) throws IOException
     {
-        String field = "hashtags";
+        WriterToFS writerToFS = new WriterToFS();
 
-        ElasticQuery query = new ElasticQuery("localhost", 9200, "http");
-        SearchRequest request = query.buildElasticQuery(new String[]{field}, null);
-        List<SearchHit> hits = query.sendElasticQuery(request);
+//        String field = "hashtags";
+//
+//        ElasticQuery query = new ElasticQuery("localhost", 9200, "http");
+//        SearchRequest request = query.buildElasticQuery(new String[]{field}, null);
+//        List<SearchHit> hits = query.sendElasticQuery(request);
+//
+//        HashtagProcessor hashProc = new HashtagProcessor();
+//        hashProc.convertToHashtagMap(hits, field);
+//        hashProc.displayHashtagMap();
+//
+//        writerToFS.writeMapToFS(hashProc.getHashList(), hashProc.getTargetDataFile());
 
-        HashtagProcessor proc = new HashtagProcessor();
-        proc.convertToHashtagMap(hits, field);
-        proc.displayHashtagMap();
-        proc.writeHashtagsToFS();
+        WordProcessor wordProc = new WordProcessor();
+        wordProc.convertToWordMap();
+
+        writerToFS.writeMapToFS(wordProc.getWordList(), wordProc.getTargetDataFile());
+
     }
 }

@@ -3,15 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="324ec104-2a80-433f-a328-da8e7c1ab3b1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/bob.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/task1-testGold.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/task1-train.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/unlabeled_short.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/unlabeled_short.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/unlabeled_test_string.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/external/FEEL.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/data/external/FEEL.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/hashtags.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/data/hashtags.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fr/ceri/entities/HashtagProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/entities/HashtagProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/polarites" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/data/polarites" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/xml2json.pl" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/tools/xml2json.pl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/entities/WordProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/entities/WordProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tweets.iml" beforeDir="false" afterPath="$PROJECT_DIR$/tweets.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +36,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
@@ -46,6 +47,9 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/fr/ceri/data" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -100,7 +104,9 @@
       <option name="presentableId" value="Default" />
       <updated>1576222872353</updated>
       <workItem from="1576222874108" duration="8725000" />
-      <workItem from="1576231630065" duration="1092000" />
+      <workItem from="1576231630065" duration="1513000" />
+      <workItem from="1576239171899" duration="5400000" />
+      <workItem from="1576251012209" duration="584000" />
     </task>
     <servers />
   </component>
@@ -112,26 +118,42 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="722" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1576223664151" />
-    <state x="765" y="235" key="#com.intellij.ide.util.MemberChooser" timestamp="1576232274719">
+    <state x="765" y="235" key="#com.intellij.ide.util.MemberChooser" timestamp="1576251198385">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="235" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1576232274719" />
-    <state width="1877" height="200" key="GridCell.Tab.0.bottom" timestamp="1576231602985">
+    <state x="765" y="235" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1576251198385" />
+    <state x="790" y="203" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1576239929954">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="200" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576231602985" />
-    <state width="1877" height="200" key="GridCell.Tab.0.center" timestamp="1576231602985">
+    <state x="790" y="203" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576239929954" />
+    <state x="623" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1576251040882">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="200" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576231602985" />
-    <state width="1877" height="200" key="GridCell.Tab.0.left" timestamp="1576231602985">
+    <state x="623" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576251040882" />
+    <state width="1877" height="294" key="GridCell.Tab.0.bottom" timestamp="1576251602955">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="200" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576231602985" />
-    <state width="1877" height="200" key="GridCell.Tab.0.right" timestamp="1576231602985">
+    <state width="1877" height="294" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576251602955" />
+    <state width="1877" height="294" key="GridCell.Tab.0.center" timestamp="1576251602955">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="200" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576231602985" />
+    <state width="1877" height="294" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576251602955" />
+    <state width="1877" height="294" key="GridCell.Tab.0.left" timestamp="1576251602955">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="294" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576251602955" />
+    <state width="1877" height="294" key="GridCell.Tab.0.right" timestamp="1576251602955">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="294" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576251602955" />
+    <state x="440" y="94" key="SettingsEditor" timestamp="1576239932220">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576239932220" />
+    <state x="664" y="413" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1576239926342">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="664" y="413" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1920.1040@0.0.1920.1040" timestamp="1576239926342" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1576229356224">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

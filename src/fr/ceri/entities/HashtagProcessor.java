@@ -24,6 +24,16 @@ public class HashtagProcessor
         mapper = new ObjectMapper();
     }
 
+    public Map<String, String> getHashList()
+    {
+        return hashList;
+    }
+
+    public String getTargetDataFile()
+    {
+        return targetDataFile;
+    }
+
     public void convertToHashtagMap(List<SearchHit> hits, String field)
     {
         for (SearchHit hit : hits)
@@ -50,13 +60,5 @@ public class HashtagProcessor
         {
             System.out.println(entry.getKey() + " → " + entry.getValue());
         }
-    }
-
-    public void writeHashtagsToFS() throws IOException
-    {
-        String output = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(hashList);
-        BufferedWriter writer = new BufferedWriter(new FileWriter(targetDataFile));
-        writer.write(output);
-        writer.close();
     }
 }
