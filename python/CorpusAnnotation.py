@@ -59,6 +59,7 @@ for tweet in data:
         tweet_polarity = "mixte"
 
     tweets_polarity[tweet['_id']] = tweet_polarity
+    print(message_clean)
 
 print(tweets_polarity)
 
