@@ -2,6 +2,7 @@ import json
 import re
 from elasticsearch import Elasticsearch, exceptions
 
+# Regex for emoticons: http://sentiment.christopherpotts.net/tokenizing.html
 
 # Code original (avant modifs): https://kb.objectrocket.com/elasticsearch/how-to-use-python-to-make-scroll-queries-to-get-all-documents-in-an-elasticsearch-index-752
 def get_all_tweets():
