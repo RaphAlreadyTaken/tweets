@@ -3,15 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="2ef49f92-1d9d-480e-beb2-6bf3e1475aa4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/json-20190722.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tweets/fr/ceri/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tweets/fr/ceri/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/unlabeled.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/data/unlabeled.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/tools/mapping_debat" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/data/mapping_debat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/tools/out.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/tools/tmp.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/testCsvJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/testCsvJson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tweets.iml" beforeDir="false" afterPath="$PROJECT_DIR$/tweets.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/unlabeled.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/data/unlabeled.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/uuid" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/tools/xml2json.pl" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/xml2json.pl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +43,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571995345400" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/fr/ceri/tools" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -57,11 +53,15 @@
     <property name="settings.editor.selected.configurable" value="com.intellij.jarRepository.settings.RemoteRepositoriesConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Raph\Documents\GitHub\tweets\src\fr\ceri\tools" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Raph\Documents\GitHub\tweets\src\fr\ceri" />
       <recent name="C:\Users\Raph\Documents\GitHub\tweets\src\fr\ceri\data" />
     </key>
   </component>
-  <component name="RunManager" selected="Perl.xml2json.pl">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="fr.ceri.Main" />
       <module name="tweets" />
@@ -75,7 +75,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="xml2json.pl" type="#PerlConfigurationType" factoryName="Perl" temporary="true" nameIsGenerated="true" show_console_on_std_err="false" show_console_on_std_out="false">
+    <configuration name="xml2json.pl" type="#PerlConfigurationType" factoryName="Perl" nameIsGenerated="true" show_console_on_std_err="false" show_console_on_std_out="false">
       <option name="allowRunningInParallel" value="false" />
       <option name="alternativeSdkName" />
       <option name="compileTimeBreakpointsEnabled" value="false" />
@@ -97,7 +97,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Perl.xml2json.pl" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -135,7 +134,8 @@
       <workItem from="1576178806216" duration="16000" />
       <workItem from="1576178832186" duration="61000" />
       <workItem from="1576178960525" duration="2031000" />
-      <workItem from="1576181214888" duration="14836000" />
+      <workItem from="1576181214888" duration="15661000" />
+      <workItem from="1576197410151" duration="451000" />
     </task>
     <servers />
   </component>
@@ -171,38 +171,38 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1081" y="522" key="FileChooserDialogImpl/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576185057035" />
-    <state width="2517" height="657" key="GridCell.Tab.0.bottom" timestamp="1576194834319">
+    <state width="2517" height="519" key="GridCell.Tab.0.bottom" timestamp="1576197863262">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="657" key="GridCell.Tab.0.bottom/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576194834319" />
-    <state width="2517" height="657" key="GridCell.Tab.0.center" timestamp="1576194834319">
+    <state width="2517" height="519" key="GridCell.Tab.0.bottom/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576197863262" />
+    <state width="2517" height="519" key="GridCell.Tab.0.center" timestamp="1576197863262">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="657" key="GridCell.Tab.0.center/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576194834319" />
-    <state width="2517" height="657" key="GridCell.Tab.0.left" timestamp="1576194834319">
+    <state width="2517" height="519" key="GridCell.Tab.0.center/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576197863262" />
+    <state width="2517" height="519" key="GridCell.Tab.0.left" timestamp="1576197863261">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="657" key="GridCell.Tab.0.left/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576194834319" />
-    <state width="2517" height="657" key="GridCell.Tab.0.right" timestamp="1576194834319">
+    <state width="2517" height="519" key="GridCell.Tab.0.left/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576197863261" />
+    <state width="2517" height="519" key="GridCell.Tab.0.right" timestamp="1576197863262">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="657" key="GridCell.Tab.0.right/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576194834319" />
-    <state width="2517" height="297" key="GridCell.Tab.1.bottom" timestamp="1576193019652">
+    <state width="2517" height="519" key="GridCell.Tab.0.right/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576197863262" />
+    <state width="2517" height="297" key="GridCell.Tab.1.bottom" timestamp="1576197007745">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="297" key="GridCell.Tab.1.bottom/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576193019652" />
-    <state width="2517" height="297" key="GridCell.Tab.1.center" timestamp="1576193019652">
+    <state width="2517" height="297" key="GridCell.Tab.1.bottom/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576197007745" />
+    <state width="2517" height="297" key="GridCell.Tab.1.center" timestamp="1576197007745">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="297" key="GridCell.Tab.1.center/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576193019652" />
-    <state width="2517" height="297" key="GridCell.Tab.1.left" timestamp="1576193019652">
+    <state width="2517" height="297" key="GridCell.Tab.1.center/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576197007745" />
+    <state width="2517" height="297" key="GridCell.Tab.1.left" timestamp="1576197007745">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="297" key="GridCell.Tab.1.left/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576193019652" />
-    <state width="2517" height="297" key="GridCell.Tab.1.right" timestamp="1576193019652">
+    <state width="2517" height="297" key="GridCell.Tab.1.left/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576197007745" />
+    <state width="2517" height="297" key="GridCell.Tab.1.right" timestamp="1576197007745">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="297" key="GridCell.Tab.1.right/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576193019652" />
+    <state width="2517" height="297" key="GridCell.Tab.1.right/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576197007745" />
     <state x="950" y="396" key="SettingsEditor" timestamp="1576192434664">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

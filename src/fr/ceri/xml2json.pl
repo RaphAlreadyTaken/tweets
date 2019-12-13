@@ -33,7 +33,7 @@ while(<IN>) {
 		($content) = ($line =~ /<message>(.*)<\/message>/);
 
 		#get hashtag in json format
-		my @t = split(" ",$content);
+		my @t = split("\s+",$content);
 		foreach my $word (@t) {
 			if($word =~ /^\#/) {
 				push (@hashtags,$word);
@@ -49,7 +49,7 @@ while(<IN>) {
 	if($line =~ /^<date>/) {
 		($date) = ($line =~ /<date>(.*)<\/date>/);
 	}
-	
+
 	#on affiche les res
 	if($line eq "</tweet>") {
 		print OUT "{\"index\":{\"_id\":$compteur}}\n";
