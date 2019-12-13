@@ -14,13 +14,13 @@ import java.util.Map;
 public class HashtagProcessor
 {
     private Map<String, String> hashList;
-    private String targetDataDir;
+    private String targetDataFile;
     private ObjectMapper mapper;
 
     public HashtagProcessor()
     {
         hashList = new HashMap<>();
-        targetDataDir = "src/fr/ceri/data/hashtags.json";
+        targetDataFile = "src/fr/ceri/data/hashtags.json";
         mapper = new ObjectMapper();
     }
 
@@ -55,7 +55,7 @@ public class HashtagProcessor
     public void writeHashtagsToFS() throws IOException
     {
         String output = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(hashList);
-        BufferedWriter writer = new BufferedWriter(new FileWriter(targetDataDir));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(targetDataFile));
         writer.write(output);
         writer.close();
     }
