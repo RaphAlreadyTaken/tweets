@@ -1,4 +1,4 @@
-package fr.ceri;
+package fr.ceri.entities;
 
 import java.io.*;
 import java.util.HashMap;

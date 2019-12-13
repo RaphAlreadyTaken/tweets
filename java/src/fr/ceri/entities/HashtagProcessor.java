@@ -20,7 +20,7 @@ public class HashtagProcessor
     public HashtagProcessor()
     {
         hashList = new HashMap<>();
-        targetDataFile = "src/fr/ceri/data/hashtags.json";
+        targetDataFile = "src/fr/ceri/data/annotated/hashtags.json";
         mapper = new ObjectMapper();
     }
 

@@ -32,6 +32,5 @@ public class Main
         wordProc.convertToWordMap();
 
         writerToFS.writeMapToFS(wordProc.getWordList(), wordProc.getTargetDataFile());
-
     }
 }

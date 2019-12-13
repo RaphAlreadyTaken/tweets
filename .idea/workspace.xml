@@ -1,13 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="324ec104-2a80-433f-a328-da8e7c1ab3b1" name="Default Changelist" comment="">
+    <list default="true" id="2612cffd-bcd6-4d77-94d4-8fc9379c0ec2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/external/FEEL.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/data/external/FEEL.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/hashtags.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/data/hashtags.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/entities/HashtagProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/entities/HashtagProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/entities/WordProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/entities/WordProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/HdrHistogram-2.1.9.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/HdrHistogram-2.1.9.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/aggs-matrix-stats-client-6.2.3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/aggs-matrix-stats-client-6.2.3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/commons-codec-1.10.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/commons-codec-1.10.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/commons-logging-1.1.3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/commons-logging-1.1.3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/compiler-0.9.3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/compiler-0.9.3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/elasticsearch-6.2.3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/elasticsearch-6.2.3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/elasticsearch-cli-6.2.3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/elasticsearch-cli-6.2.3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/elasticsearch-core-6.2.3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/elasticsearch-core-6.2.3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/elasticsearch-rest-client-6.2.3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/elasticsearch-rest-client-6.2.3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/elasticsearch-rest-client-6.8.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/elasticsearch-rest-client-6.8.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/elasticsearch-rest-high-level-client-6.2.3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/elasticsearch-rest-high-level-client-6.2.3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/hppc-0.7.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/hppc-0.7.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/httpasyncclient-4.1.2.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/httpasyncclient-4.1.2.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/httpclient-4.5.2.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/httpclient-4.5.2.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/httpcore-4.4.5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/httpcore-4.4.5.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/httpcore-nio-4.4.5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/httpcore-nio-4.4.5.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-annotations-2.8.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/jackson-annotations-2.8.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-core-2.8.10.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/jackson-core-2.8.10.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-core-2.8.3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/jackson-core-2.8.3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-databind-2.8.3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/jackson-databind-2.8.3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-dataformat-cbor-2.8.10.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/jackson-dataformat-cbor-2.8.10.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-dataformat-smile-2.8.10.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/jackson-dataformat-smile-2.8.10.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-dataformat-yaml-2.8.10.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/jackson-dataformat-yaml-2.8.10.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jna-4.5.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/jna-4.5.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/joda-time-2.9.9.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/joda-time-2.9.9.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jopt-simple-5.0.2.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/jopt-simple-5.0.2.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jts-1.13.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/jts-1.13.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/lang-mustache-client-6.2.3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/lang-mustache-client-6.2.3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/log4j-api-2.9.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/log4j-api-2.9.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/log4j-core-2.9.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/log4j-core-2.9.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/lucene-analyzers-common-7.2.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/lucene-analyzers-common-7.2.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/lucene-backward-codecs-7.2.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/lucene-backward-codecs-7.2.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/lucene-core-7.2.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/lucene-core-7.2.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/lucene-grouping-7.2.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/lucene-grouping-7.2.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/lucene-highlighter-7.2.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/lucene-highlighter-7.2.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/lucene-join-7.2.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/lucene-join-7.2.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/lucene-memory-7.2.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/lucene-memory-7.2.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/lucene-misc-7.2.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/lucene-misc-7.2.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/lucene-queries-7.2.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/lucene-queries-7.2.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/lucene-queryparser-7.2.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/lucene-queryparser-7.2.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/lucene-sandbox-7.2.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/lucene-sandbox-7.2.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/lucene-spatial-7.2.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/lucene-spatial-7.2.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/lucene-spatial-extras-7.2.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/lucene-spatial-extras-7.2.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/lucene-spatial3d-7.2.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/lucene-spatial3d-7.2.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/lucene-suggest-7.2.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/lucene-suggest-7.2.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-buffer-4.1.16.Final.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/netty-buffer-4.1.16.Final.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-codec-4.1.16.Final.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/netty-codec-4.1.16.Final.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-codec-http-4.1.16.Final.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/netty-codec-http-4.1.16.Final.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-common-4.1.16.Final.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/netty-common-4.1.16.Final.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-handler-4.1.16.Final.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/netty-handler-4.1.16.Final.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-resolver-4.1.16.Final.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/netty-resolver-4.1.16.Final.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-transport-4.1.16.Final.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/netty-transport-4.1.16.Final.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/parent-join-client-6.2.3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/parent-join-client-6.2.3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/percolator-client-6.2.3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/percolator-client-6.2.3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/rank-eval-client-6.2.3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/rank-eval-client-6.2.3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/reindex-client-6.2.3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/reindex-client-6.2.3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/securesm-1.2.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/securesm-1.2.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/snakeyaml-1.17.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/snakeyaml-1.17.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/spatial4j-0.6.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/spatial4j-0.6.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/t-digest-3.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/t-digest-3.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/transport-6.2.3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/transport-6.2.3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/transport-netty4-client-6.2.3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/java/lib/transport-netty4-client-6.2.3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/LexiqueCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/fr/ceri/entities/LexiqueCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/fr/ceri/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/external/FEEL.csv" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/fr/ceri/data/external/FEEL.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/hashtags.json" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/fr/ceri/data/annotated/hashtags.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/mapping_debat" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/fr/ceri/data/config/mapping_debat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/plugins/inputs/file/.sincedb_6875db0abe36e32ab8e15f98267cc795" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/polarites" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/fr/ceri/data/config/polarites" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/unlabeled.json" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/fr/ceri/data/raw/unlabeled.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/unlabeled.xml" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/fr/ceri/data/raw/unlabeled.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/words.json" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/fr/ceri/data/annotated/words.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/entities/ElasticQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/fr/ceri/entities/ElasticQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/entities/HashtagProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/fr/ceri/entities/HashtagProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/entities/WordProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/fr/ceri/entities/WordProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/entities/WriterToFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/fr/ceri/entities/WriterToFS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/tools/TweetDataExtractor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/tools/xml2json.pl" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/fr/ceri/tools/xml2json.pl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/testCsvJson.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/tweets.iml" beforeDir="false" afterPath="$PROJECT_DIR$/tweets.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -18,14 +92,14 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1Uv2i9PL8mKvxxkBhIsIAeX1kTs" />
+  <component name="ProjectId" id="1UwQPOb2tWIVkV7xZsTCYZgtLqN" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
@@ -35,51 +109,27 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/fr/ceri/data" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Raph\Documents\GitHub\tweets\src\fr\ceri\data\external" />
-      <recent name="C:\Users\Raph\Documents\GitHub\tweets\src\fr\ceri\data" />
-      <recent name="C:\Users\Raph\Documents\GitHub\tweets\src\fr\ceri\tools" />
+      <recent name="C:\Users\Raph\Documents\GitHub\tweets\java" />
+      <recent name="C:\Users\Raph\Documents\GitHub\tweets\src\fr\ceri\data\input" />
+      <recent name="C:\Users\Raph\Documents\GitHub\tweets\src\fr\ceri\data\config" />
+      <recent name="C:\Users\Raph\Documents\GitHub\tweets\src\fr\ceri\data\annotated" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Raph\Documents\GitHub\tweets\src\fr\ceri\data" />
-    </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="fr.ceri.Main" />
-      <module name="tweets" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fr.ceri.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Main" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -98,15 +148,12 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="324ec104-2a80-433f-a328-da8e7c1ab3b1" name="Default Changelist" comment="" />
-      <created>1576222872353</created>
+      <changelist id="2612cffd-bcd6-4d77-94d4-8fc9379c0ec2" name="Default Changelist" comment="" />
+      <created>1576265152062</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1576222872353</updated>
-      <workItem from="1576222874108" duration="8725000" />
-      <workItem from="1576231630065" duration="1513000" />
-      <workItem from="1576239171899" duration="5400000" />
-      <workItem from="1576251012209" duration="584000" />
+      <updated>1576265152062</updated>
+      <workItem from="1576265153798" duration="1013000" />
     </task>
     <servers />
   </component>
@@ -114,49 +161,25 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="722" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1576223664151">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="872" y="358" key="#Project_Structure" timestamp="1576269462614">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="722" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1576223664151" />
-    <state x="765" y="235" key="#com.intellij.ide.util.MemberChooser" timestamp="1576251198385">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="872" y="358" key="#Project_Structure/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576269462614" />
+    <state x="1110" y="383" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1576265397020">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="765" y="235" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1576251198385" />
-    <state x="790" y="203" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1576239929954">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="1110" y="383" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576265397020" />
+    <state x="760" y="274" key="SettingsEditor" timestamp="1576265398217">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="790" y="203" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576239929954" />
-    <state x="623" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1576251040882">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="760" y="274" key="SettingsEditor/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576265398217" />
+    <state x="984" y="593" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1576265394179">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="623" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576251040882" />
-    <state width="1877" height="294" key="GridCell.Tab.0.bottom" timestamp="1576251602955">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="984" y="593" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576265394179" />
+    <state x="663" y="320" key="new project wizard" timestamp="1576269428750">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1877" height="294" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576251602955" />
-    <state width="1877" height="294" key="GridCell.Tab.0.center" timestamp="1576251602955">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="294" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576251602955" />
-    <state width="1877" height="294" key="GridCell.Tab.0.left" timestamp="1576251602955">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="294" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576251602955" />
-    <state width="1877" height="294" key="GridCell.Tab.0.right" timestamp="1576251602955">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="294" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576251602955" />
-    <state x="440" y="94" key="SettingsEditor" timestamp="1576239932220">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576239932220" />
-    <state x="664" y="413" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1576239926342">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="664" y="413" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1920.1040@0.0.1920.1040" timestamp="1576239926342" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1576229356224">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1576229356224" />
+    <state x="663" y="320" key="new project wizard/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576269428750" />
   </component>
 </project>

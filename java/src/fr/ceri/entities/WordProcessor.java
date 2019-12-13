@@ -22,7 +22,7 @@ public class WordProcessor
     {
         wordList = new HashMap<>();
         inputFile = "src/fr/ceri/data/external/FEEL.csv";
-        targetDataFile = "src/fr/ceri/data/words.json";
+        targetDataFile = "src/fr/ceri/data/annotated/words.json";
     }
 
     public Map<String, String> getWordList()
@@ -46,11 +46,6 @@ public class WordProcessor
         for (CSVRecord record : records)
         {
             wordList.put(record.get(1), record.get(2));
-        }
-
-        for (Map.Entry<String, String> entry : wordList.entrySet())
-        {
-            System.out.println(entry.getKey() + " → " + entry.getValue());
         }
     }
 }
