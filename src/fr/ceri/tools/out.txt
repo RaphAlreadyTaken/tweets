@@ -1,6 +1,0 @@
-{"index":{"_index":"test_debat","_type":"tweet","_id":1}}
-{"date":"2017-05-03 22:58:51","favoris":"3","message":"#2017LeDebat C'était un suicide prémédité par peur du pouvoir et des responsabilités, ou Le pen est juste une cruche vide ?","retweet":"1","username":"lepetitcevenol","hashtags":[{"text":"#2017LeDebat"}]}
-{"index":{"_index":"test_debat","_type":"tweet","_id":2}}
-{"date":"2017-05-03 22:55:00","favoris":"4","message":"ET L'ÉCOLOGIE ?","retweet":"0","username":"clarabllieul","hashtags":[]}
-{"index":{"_index":"test_debat","_type":"tweet","_id":3}}
-{"date":"2017-05-03 22:54:03","favoris":"508","message":"Conclusion du journaliste #test : \"Madame LePen, vous ne respectez même pas les règles que vous avez vous-même fixées\". Tout est dit #2017LeDebat","retweet":"245","username":"EnMarcheParis","hashtags":[{"text":"#test"},{"text":"#2017LeDebat"}]}
