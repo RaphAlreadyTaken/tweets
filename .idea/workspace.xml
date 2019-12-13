@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2ef49f92-1d9d-480e-beb2-6bf3e1475aa4" name="Default Changelist" comment="">
+    <list default="true" id="324ec104-2a80-433f-a328-da8e7c1ab3b1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/$PRODUCT_WORKSPACE_FILE$" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/unlabeled.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/data/unlabeled.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/unlabeled.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/data/unlabeled.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/data/uuid" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fr/ceri/tools/xml2json.pl" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/xml2json.pl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tweets/fr/ceri/LexiqueCreator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tweets/fr/ceri/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tweets/fr/ceri/data/task1-testGold.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tweets/fr/ceri/data/task1-train.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fr/ceri/entities/HashtagProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fr/ceri/entities/HashtagProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tweets.iml" beforeDir="false" afterPath="$PROJECT_DIR$/tweets.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1SFC8n70di9d96ImW2Qe6Dk8kPG" />
+  <component name="ProjectId" id="1Uv2i9PL8mKvxxkBhIsIAeX1kTs" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
@@ -34,66 +31,27 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="true" />
-    <property name="Repository.Attach.Annotations" value="false" />
-    <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="Repository.Attach.Sources" value="false" />
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571995345400" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/fr/ceri/tools" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="com.intellij.jarRepository.settings.RemoteRepositoriesConfigurable" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Raph\Documents\GitHub\tweets\src\fr\ceri\tools" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Raph\Documents\GitHub\tweets\src\fr\ceri" />
-      <recent name="C:\Users\Raph\Documents\GitHub\tweets\src\fr\ceri\data" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="fr.ceri.Main" />
       <module name="tweets" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="fr.ceri.entities.*" />
+          <option name="PATTERN" value="fr.ceri.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
-    </configuration>
-    <configuration name="xml2json.pl" type="#PerlConfigurationType" factoryName="Perl" nameIsGenerated="true" show_console_on_std_err="false" show_console_on_std_out="false">
-      <option name="allowRunningInParallel" value="false" />
-      <option name="alternativeSdkName" />
-      <option name="compileTimeBreakpointsEnabled" value="false" />
-      <option name="consoleCharset" value="UTF-8" />
-      <option name="envs">
-        <map />
-      </option>
-      <option name="initCode" value="" />
-      <option name="nonInteractiveModeEnabled" value="false" />
-      <option name="passParentEnvs" value="true" />
-      <option name="perlParameters" value="" />
-      <option name="programParameters" />
-      <option name="scriptCharset" value="utf8" />
-      <option name="scriptPath" value="$PROJECT_DIR$/src/fr/ceri/tools/xml2json.pl" />
-      <option name="startMode" value="RUN" />
-      <option name="useAlternativeSdk" value="false" />
-      <option name="workingDirectory" />
-      <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
@@ -118,24 +76,12 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="2ef49f92-1d9d-480e-beb2-6bf3e1475aa4" name="Default Changelist" comment="" />
-      <created>1571149799497</created>
+      <changelist id="324ec104-2a80-433f-a328-da8e7c1ab3b1" name="Default Changelist" comment="" />
+      <created>1576222872353</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1571149799497</updated>
-      <workItem from="1571149801012" duration="6450000" />
-      <workItem from="1571156324280" duration="1012000" />
-      <workItem from="1571986906035" duration="3208000" />
-      <workItem from="1573552839329" duration="596000" />
-      <workItem from="1573630866742" duration="1332000" />
-      <workItem from="1573647153627" duration="660000" />
-      <workItem from="1573807627548" duration="686000" />
-      <workItem from="1574062892785" duration="617000" />
-      <workItem from="1576178806216" duration="16000" />
-      <workItem from="1576178832186" duration="61000" />
-      <workItem from="1576178960525" duration="2031000" />
-      <workItem from="1576181214888" duration="15661000" />
-      <workItem from="1576197410151" duration="451000" />
+      <updated>1576222872353</updated>
+      <workItem from="1576222874108" duration="8455000" />
     </task>
     <servers />
   </component>
@@ -143,77 +89,29 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="872" y="358" key="#Plugins" timestamp="1576181315875">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="722" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1576223664151">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="872" y="358" key="#Plugins/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576181315875" />
-    <state x="1085" y="400" key="#com.intellij.ide.util.MemberChooser" timestamp="1576194143533">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="722" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1576223664151" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1576223653043">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1085" y="400" key="#com.intellij.ide.util.MemberChooser/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576194143533" />
-    <state x="1111" y="451" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1576192427006">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576223653043" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1576223653043">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1111" y="451" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576192427006" />
-    <state x="953" y="391" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1576178807900">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576223653043" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1576223653043">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="953" y="391" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576178807900" />
-    <state x="1031" y="522" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog" timestamp="1576192430961">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576223653043" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1576223653043">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1031" y="522" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576192430961" />
-    <state x="1157" y="402" key="#xdebugger.evaluate" timestamp="1576192840770">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576223653043" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1576229356224">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1157" y="402" key="#xdebugger.evaluate/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576192840770" />
-    <state x="1081" y="522" key="FileChooserDialogImpl" timestamp="1576185057035">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1081" y="522" key="FileChooserDialogImpl/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576185057035" />
-    <state width="2517" height="519" key="GridCell.Tab.0.bottom" timestamp="1576197863262">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="519" key="GridCell.Tab.0.bottom/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576197863262" />
-    <state width="2517" height="519" key="GridCell.Tab.0.center" timestamp="1576197863262">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="519" key="GridCell.Tab.0.center/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576197863262" />
-    <state width="2517" height="519" key="GridCell.Tab.0.left" timestamp="1576197863261">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="519" key="GridCell.Tab.0.left/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576197863261" />
-    <state width="2517" height="519" key="GridCell.Tab.0.right" timestamp="1576197863262">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="519" key="GridCell.Tab.0.right/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576197863262" />
-    <state width="2517" height="297" key="GridCell.Tab.1.bottom" timestamp="1576197007745">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="297" key="GridCell.Tab.1.bottom/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576197007745" />
-    <state width="2517" height="297" key="GridCell.Tab.1.center" timestamp="1576197007745">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="297" key="GridCell.Tab.1.center/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576197007745" />
-    <state width="2517" height="297" key="GridCell.Tab.1.left" timestamp="1576197007745">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="297" key="GridCell.Tab.1.left/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576197007745" />
-    <state width="2517" height="297" key="GridCell.Tab.1.right" timestamp="1576197007745">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2517" height="297" key="GridCell.Tab.1.right/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576197007745" />
-    <state x="950" y="396" key="SettingsEditor" timestamp="1576192434664">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="950" y="396" key="SettingsEditor/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576192434664" />
-    <state x="1005" y="661" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1576192419958">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1005" y="661" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576192419958" />
-    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1576186118493">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576186118493" />
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1576229356224" />
   </component>
 </project>
