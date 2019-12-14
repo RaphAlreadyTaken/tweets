@@ -1,12 +1,17 @@
 import json
 import re
 
+import nltk
 from elasticsearch import Elasticsearch, exceptions
 
+nltk.download("stopwords")
 
 # Regex for emoticons: http://sentiment.christopherpotts.net/tokenizing.html
 
 # Code original (avant modifs): https://kb.objectrocket.com/elasticsearch/how-to-use-python-to-make-scroll-queries-to-get-all-documents-in-an-elasticsearch-index-752
+from nltk import SnowballStemmer
+
+
 def get_all_tweets():
     # declare globals for the Elasticsearch client host
     DOMAIN = "localhost"
@@ -88,6 +93,25 @@ def remove_username(message):
 
 def remove_url(message):
     return re.sub(r"(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)", '', message)
+
+
+def remove_elisions(message):
+    for i, s in enumerate(message):
+        match = re.search(".'([^\\s]*)", s)
+
+        if match:
+            message[i] = match.group(1)
+
+    return message
+
+
+def lemmatize(message):
+    """Lemmatisation
+    Le dictionnaire de correspondances doit être également lemmatisé avec Snowball
+    (adaptation de Porter Stemmer en français)
+    """
+    stemmer = SnowballStemmer("french", ignore_stopwords=True)
+    return [stemmer.stem(x) for x in message]
 
 
 def clean_message(message):

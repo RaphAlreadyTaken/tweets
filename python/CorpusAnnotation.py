@@ -1,12 +1,6 @@
 import json
-import re
-
-import nltk
-from nltk import SnowballStemmer
 
 import util
-
-nltk.download("stopwords")
 
 dict_hashtags = {'#irrespect': "negatif", "#2017LeDebat": "neutre", "#Joie": "positif"}
 dict_words = {'pute': "negatif", "content": "positif"}
@@ -33,20 +27,13 @@ for tweet in data:
     message = tweet['_source']['message']
     message_clean = util.clean_message(message)
 
-    # Lemmatisation (le dictionnaire de correspondances doit être également lemmatisé avec Snowball
-    # (adaptation de Porter Stemmer en français))
-    stemmer = SnowballStemmer("french", ignore_stopwords=True)
     message_clean_splitted = message_clean.split()
 
     # Suppression des élisions (l'arbre, c'était, t'as, ...) (voir si on peut faire plus propre)
-    for i, s in enumerate(message_clean_splitted):
-        match = re.search(".'([^\\s]*)", s)
+    message_clean_splitted = util.remove_elisions(message_clean_splitted)
 
-        if match:
-            # print(match.group(1))
-            message_clean_splitted[i] = match.group(1)
-
-    message_clean = [stemmer.stem(x) for x in message_clean_splitted]
+    # Lemmatisation
+    message_clean = util.lemmatize(message_clean_splitted)
 
     for mot in message_clean:
         if dict_words.get(mot) is not None:
