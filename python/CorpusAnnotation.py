@@ -1,4 +1,5 @@
 import json
+import re
 
 import nltk
 from nltk import SnowballStemmer
@@ -36,6 +37,15 @@ for tweet in data:
     # (adaptation de Porter Stemmer en français))
     stemmer = SnowballStemmer("french", ignore_stopwords=True)
     message_clean_splitted = message_clean.split()
+
+    # Suppression des élisions (l'arbre, c'était, t'as, ...) (voir si on peut faire plus propre)
+    for i, s in enumerate(message_clean_splitted):
+        match = re.search(".'([^\\s]*)", s)
+
+        if match:
+            # print(match.group(1))
+            message_clean_splitted[i] = match.group(1)
+
     message_clean = [stemmer.stem(x) for x in message_clean_splitted]
 
     for mot in message_clean:

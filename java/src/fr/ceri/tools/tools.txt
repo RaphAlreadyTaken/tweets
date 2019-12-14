@@ -1,0 +1,31 @@
+
+#######################################################
+FEEL (French Expanded Emotion Lexicon) : liste de 14000 mots usuels avec leur polarité (positive ou négative) et leur connotation (6 sentiments associés).
+
+Utilité : permet d'analyser les messages des tweets et d'associer des polarités à chaque mot rencontré → obtention d'un score global du tweet → polarité du tweet.
+
+Ref :
+Amine Abdaoui, Jérôme Azé, Sandra Bringay et Pascal Poncelet. FEEL: French Expanded Emotion Lexicon. Language Resources and Evaluation, LRE 2016, pp 1-23.
+#######################################################
+
+#######################################################
+Doc2Vec : algorithme de machine learning produisant des vecteurs de représentation de données textuelles, en tenant compte de leur proximité contextuelle.
+
+Utilité : permet de représenter des phrases, paragraphes ou documents sous forme de vecteurs en vue de les fournir en entrée d'un système de machine learning.
+
+Ref :
+@article{DBLP:journals/corr/LeM14,
+  author    = {Quoc V. Le and
+               Tomas Mikolov},
+  title     = {Distributed Representations of Sentences and Documents},
+  journal   = {CoRR},
+  volume    = {abs/1405.4053},
+  year      = {2014},
+  url       = {http://arxiv.org/abs/1405.4053},
+  archivePrefix = {arXiv},
+  eprint    = {1405.4053},
+  timestamp = {Mon, 13 Aug 2018 16:48:49 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/LeM14},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+#######################################################
