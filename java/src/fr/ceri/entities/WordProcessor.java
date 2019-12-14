@@ -3,6 +3,8 @@ package fr.ceri.entities;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.tartarus.snowball.SnowballStemmer;
+import org.tartarus.snowball.ext.frenchStemmer;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -35,7 +37,7 @@ public class WordProcessor
         return targetDataFile;
     }
 
-    public void convertToWordMap() throws IOException
+    public void convertToWordMapAndStem() throws IOException
     {
         Reader input = Files.newBufferedReader(Paths.get(inputFile));
         CSVFormat format = CSVFormat.DEFAULT.withDelimiter(';');
@@ -45,7 +47,11 @@ public class WordProcessor
 
         for (CSVRecord record : records)
         {
-            wordList.put(record.get(1), record.get(2));
+            // Stemming
+            SnowballStemmer stemmer = new frenchStemmer();
+            stemmer.setCurrent(record.get(1));
+            stemmer.stem();
+            wordList.put(stemmer.getCurrent(), record.get(2));
         }
     }
 }

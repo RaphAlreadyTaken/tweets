@@ -1,6 +1,8 @@
 import json
 import re
+
 from elasticsearch import Elasticsearch, exceptions
+
 
 # Regex for emoticons: http://sentiment.christopherpotts.net/tokenizing.html
 
@@ -49,7 +51,7 @@ def get_all_tweets():
 
         retour = []
 
-        #stockage 100 premiers
+        # stockage 100 premiers
         for doc in resp['hits']['hits']:
             retour.append(doc)
 
@@ -77,15 +79,15 @@ def remove_punctuation(message):
 
 
 def remove_hashtag(message):
-    return re.sub(r"(#\w+)",'', message)
+    return re.sub(r"(#\w+)", '', message)
 
 
 def remove_username(message):
-    return re.sub(r"(@\w+)",'', message)
+    return re.sub(r"(@\w+)", '', message)
 
 
 def remove_url(message):
-    return re.sub(r"(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)",'', message)
+    return re.sub(r"(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)", '', message)
 
 
 def clean_message(message):
@@ -94,9 +96,9 @@ def clean_message(message):
     retour = remove_url(retour)
     retour = remove_punctuation(retour)
 
-    retour = re.sub(' +', ' ', retour) #enlever les multiples espaces
-    retour = retour.strip() #enlever les trailing spaces
+    retour = re.sub(' +', ' ', retour)  # enlever les multiples espaces
+    retour = retour.strip()  # enlever les trailing spaces
 
-    retour = retour.lower() #tout minuscule
+    retour = retour.lower()  # tout minuscule
 
     return retour

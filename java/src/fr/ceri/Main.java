@@ -1,14 +1,9 @@
 package fr.ceri;
 
-import fr.ceri.entities.ElasticQuery;
-import fr.ceri.entities.HashtagProcessor;
 import fr.ceri.entities.WordProcessor;
 import fr.ceri.entities.WriterToFS;
-import org.elasticsearch.action.search.SearchRequest;
-import org.elasticsearch.search.SearchHit;
 
 import java.io.IOException;
-import java.util.List;
 
 public class Main
 {
@@ -29,7 +24,7 @@ public class Main
 //        writerToFS.writeMapToFS(hashProc.getHashList(), hashProc.getTargetDataFile());
 
         WordProcessor wordProc = new WordProcessor();
-        wordProc.convertToWordMap();
+        wordProc.convertToWordMapAndStem();
 
         writerToFS.writeMapToFS(wordProc.getWordList(), wordProc.getTargetDataFile());
     }
