@@ -9,7 +9,27 @@ Amine Abdaoui, Jérôme Azé, Sandra Bringay et Pascal Poncelet. FEEL: French Ex
 #######################################################
 
 #######################################################
+Snowball : langage de traitement de chaînes de caractères permettant la création d'algorithmes de lemmatisation de mots
+(supporte plusieurs langues, notamment le français). Adapté du lemmatiseur Porter (anglais uniquement)
 
+Utilité : permet de ramener les mots à leur forme canonique pour pouvoir identifier des correspondances plus facilement.
+
+Ref:
+@misc{snowball,
+  added-at = {2008-03-11T15:53:08.000+0100},
+  author = {Porter, Martin F.},
+  biburl = {https://www.bibsonomy.org/bibtex/2a0334d9771cea49e3d12e5d71180300f/danielt},
+  howpublished = {Published online},
+  interhash = {a9213c856a8b690e9ebe255096d91a83},
+  intrahash = {a0334d9771cea49e3d12e5d71180300f},
+  keywords = {NaturalLanguage(Processing) dipl_literatur information_retrieval stemming},
+  month = {October},
+  note = {Accessed 11.03.2008, 15.00h},
+  timestamp = {2008-03-25T12:26:47.000+0100},
+  title = {Snowball: A language for stemming algorithms},
+  url = {http://snowball.tartarus.org/texts/introduction.html},
+  year = 2001
+}
 #######################################################
 
 #######################################################
