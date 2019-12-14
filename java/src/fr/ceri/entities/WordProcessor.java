@@ -37,7 +37,7 @@ public class WordProcessor
         return targetDataFile;
     }
 
-    public void convertToWordMapAndStem() throws IOException
+    public void convertToWordMapAndFormat() throws IOException
     {
         Reader input = Files.newBufferedReader(Paths.get(inputFile));
         CSVFormat format = CSVFormat.DEFAULT.withDelimiter(';');
@@ -47,11 +47,25 @@ public class WordProcessor
 
         for (CSVRecord record : records)
         {
-            // Stemming
-            SnowballStemmer stemmer = new frenchStemmer();
-            stemmer.setCurrent(record.get(1));
-            stemmer.stem();
-            wordList.put(stemmer.getCurrent(), record.get(2));
+            String word = record.get(1);
+
+            // On traite les entrées ne contenant qu'un mot
+            if (!word.contains(" "))
+            {
+                word = word.toLowerCase();
+
+                // On ne conserve que le premier mot dans les entrées polymorphiques (ex: planteur|plante → planteur)
+                if (word.contains("|"))
+                {
+                    word = word.substring(0, word.lastIndexOf("|"));
+                }
+
+                // Stemming
+                SnowballStemmer stemmer = new frenchStemmer();
+                stemmer.setCurrent(word);
+                stemmer.stem();
+                wordList.put(stemmer.getCurrent(), record.get(2));
+            }
         }
     }
 }

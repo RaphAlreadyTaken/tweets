@@ -24,7 +24,7 @@ public class Main
 //        writerToFS.writeMapToFS(hashProc.getHashList(), hashProc.getTargetDataFile());
 
         WordProcessor wordProc = new WordProcessor();
-        wordProc.convertToWordMapAndStem();
+        wordProc.convertToWordMapAndFormat();
 
         writerToFS.writeMapToFS(wordProc.getWordList(), wordProc.getTargetDataFile());
     }
