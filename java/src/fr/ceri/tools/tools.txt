@@ -9,6 +9,10 @@ Amine Abdaoui, Jérôme Azé, Sandra Bringay et Pascal Poncelet. FEEL: French Ex
 #######################################################
 
 #######################################################
+
+#######################################################
+
+#######################################################
 Doc2Vec : algorithme de machine learning produisant des vecteurs de représentation de données textuelles, en tenant compte de leur proximité contextuelle.
 
 Utilité : permet de représenter des phrases, paragraphes ou documents sous forme de vecteurs en vue de les fournir en entrée d'un système de machine learning.

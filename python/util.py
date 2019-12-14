@@ -96,6 +96,9 @@ def remove_url(message):
 
 
 def remove_elisions(message):
+    """Suppression des élisions
+    ex: l'arbre, c'était, t'as, ... deviennent arbre, était, as, ... (voir si on peut faire plus propre)
+    """
     for i, s in enumerate(message):
         match = re.search(".'([^\\s]*)", s)
 
@@ -126,3 +129,28 @@ def clean_message(message):
     retour = retour.lower()  # tout minuscule
 
     return retour
+
+
+def format_message_split(message):
+    retour = remove_elisions(message)
+    retour = lemmatize(retour)
+    return retour
+
+
+def clean_full(message):
+    retour = clean_message(message)
+    retour_split = retour.split()
+    retour_split = format_message_split(retour_split)
+    return retour_split
+
+# TODO : écrire sur disque (long à relancer à chaque fois pour vectorisation)
+def get_messages_as_dict():
+    messages = {}
+    tweets = get_all_tweets()
+
+    for i, s in enumerate(tweets):
+        tweet_id = s['_id']
+        tweet_text = clean_full(s['_source']['message'])
+        messages[tweet_id] = tweet_text
+
+    return messages

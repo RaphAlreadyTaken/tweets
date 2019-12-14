@@ -28,12 +28,7 @@ for tweet in data:
     message_clean = util.clean_message(message)
 
     message_clean_splitted = message_clean.split()
-
-    # Suppression des élisions (l'arbre, c'était, t'as, ...) (voir si on peut faire plus propre)
-    message_clean_splitted = util.remove_elisions(message_clean_splitted)
-
-    # Lemmatisation
-    message_clean = util.lemmatize(message_clean_splitted)
+    message_clean = util.format_message_split(message_clean_splitted)
 
     for mot in message_clean:
         if dict_words.get(mot) is not None:
