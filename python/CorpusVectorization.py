@@ -8,7 +8,8 @@ import util
 
 def configure_model(local_documents):
     print("Configuring and building model")
-    docs_to_vectorize = [TaggedDocument(tweet_text, tweet_id) for tweet_id, tweet_text in local_documents.items()]
+    docs_to_vectorize = [TaggedDocument(words=tweet_text, tags=[tweet_id]) for tweet_id, tweet_text in
+                         local_documents.items()]
     local_model = Doc2Vec(vector_size=100, min_count=2)
     local_model.build_vocab(docs_to_vectorize)
     print("Model ready")
@@ -30,7 +31,7 @@ def save_model(local_model):
 
 def get_vectors_from_model(model_path):
     local_model = Doc2Vec.load(model_path)
-    return local_model.docvecs
+    return local_model.docvecs.vectors_docs
 
 
 if __name__ == '__main__':
@@ -39,7 +40,7 @@ if __name__ == '__main__':
     # train_model(model, documents, 100)
     # save_model(model)
 
-    vectors = get_vectors_from_model("models/tweet_vectors_1576343839.7709334.model")
+    vectors = get_vectors_from_model("models/tweet_vectors_1576409907.8980725.model")
 
     for vector in vectors:
         pprint(vector)
