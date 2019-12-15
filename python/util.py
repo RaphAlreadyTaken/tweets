@@ -2,7 +2,10 @@ import json
 import re
 import nltk
 from elasticsearch import Elasticsearch, exceptions
+import demoji
+import csv
 
+demoji.download_codes()
 nltk.download("stopwords")
 
 # Regex for emoticons: http://sentiment.christopherpotts.net/tokenizing.html
@@ -155,20 +158,42 @@ def get_messages_as_dict():
     return messages
 
 
+# Source: https://pypi.org/project/demoji/
 def get_emojis(message):
-    # Regex to match emojis
-    regex_emoji = re.compile("(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])")
+    # # Regex to match emojis
+    # regex_emoji = re.compile("(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])")
+    #
+    # ### Cleaning
+    # message = message.replace("’", '')
+    # message = message.replace(u"\u2026", '') # remove "..." unicode char
+    # message = message.replace(u"\u2013", '') # remove "–" unicode char
+    # message = message.replace(u"\u2014", '') # remove "–" unicode char
+    #
+    # # Split non separated emojis
+    # message_splitted = list(x for x in regex_emoji.split(message) if x != '')
+    #
+    # # Return list of emojis
+    # retour = [i for i in message_splitted if regex_emoji.match(i)]
 
-    ### Cleaning
-    message = message.replace("’", '')
-    message = message.replace(u"\u2026", '') # remove "..." unicode char
-    message = message.replace(u"\u2013", '') # remove "–" unicode char
-    message = message.replace(u"\u2014", '') # remove "–" unicode char
+    retour = list(demoji.findall(message).keys())
 
-    # Split non separated emojis
-    message_splitted = list(x for x in regex_emoji.split(message) if x != '')
+    return retour
 
-    # Return list of emojis
-    retour = [i for i in message_splitted if regex_emoji.match(i)]
+
+def load_emoji_classification(filepath):
+    retour = {}
+
+    with open(filepath, 'r', encoding="utf8") as file:
+        reader = csv.reader(file)
+        for row in reader:
+            if row[0] != 'Emoji':
+                if int(row[4]) > int(row[5]):
+                    retour[row[0]] = "negatif"
+                    max_value = int(row[4])
+                else:
+                    retour[row[0]] = "neutre"
+                    max_value = int(row[5])
+                if max_value < int(row[6]):
+                    retour[row[0]] = "positif"
 
     return retour
