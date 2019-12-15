@@ -1,6 +1,5 @@
 import json
 import re
-
 import nltk
 from elasticsearch import Elasticsearch, exceptions
 
@@ -154,3 +153,22 @@ def get_messages_as_dict():
         messages[tweet_id] = tweet_text
 
     return messages
+
+
+def get_emojis(message):
+    # Regex to match emojis
+    regex_emoji = re.compile("(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])")
+
+    ### Cleaning
+    message = message.replace("’", '')
+    message = message.replace(u"\u2026", '') # remove "..." unicode char
+    message = message.replace(u"\u2013", '') # remove "–" unicode char
+    message = message.replace(u"\u2014", '') # remove "–" unicode char
+
+    # Split non separated emojis
+    message_splitted = list(x for x in regex_emoji.split(message) if x != '')
+
+    # Return list of emojis
+    retour = [i for i in message_splitted if regex_emoji.match(i)]
+
+    return retour

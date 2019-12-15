@@ -33,6 +33,10 @@ for tweet in data:
     message = tweet['_source']['message']
     message_clean = util.clean_message(message)
 
+    message_emojis = util.get_emojis(message_clean)
+    # if len(message_emojis) > 0:
+    #     print( tweet['_id'], ':', message_emojis)
+
     message_clean_splitted = message_clean.split()
     message_clean = util.format_message_split(message_clean_splitted)
 
@@ -68,7 +72,7 @@ for tweet in data:
         tweet_polarity = "mixte"
 
     tweets_polarity[tweet['_id']] = tweet_polarity
-    print(message_clean)
+    # print(message_clean)
 
 print(tweets_polarity)
 
