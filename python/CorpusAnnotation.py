@@ -2,8 +2,14 @@ import json
 
 import util
 
-dict_hashtags = {'#irrespect': "negatif", "#2017LeDebat": "neutre", "#Joie": "positif"}
-dict_words = {'pute': "negatif", "content": "positif"}
+with open('../java/src/fr/ceri/data/annotated/hashtags.json', 'r') as file:
+    dict_hashtags = json.load(file)
+
+with open('../java/src/fr/ceri/data/annotated/words.json', 'r') as file:
+    dict_words = json.load(file)
+
+# dict_hashtags = {'#irrespect': "negatif", "#2017LeDebat": "neutre", "#Joie": "positif"}
+# dict_words = {'pute': "negatif", "content": "positif"}
 dict_date = {}
 
 dict_correspondances = {
@@ -66,5 +72,5 @@ for tweet in data:
 
 print(tweets_polarity)
 
-with open('result.json', 'w') as file:
+with open('../java/src/fr/ceri/data/annotated/apprentissage.json', 'w') as file:
     json.dump(tweets_polarity, file)
