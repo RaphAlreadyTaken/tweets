@@ -53,3 +53,10 @@ Ref :
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 #######################################################
+
+
+# detection d'emoji:
+https://www.regextester.com/106421
+
+#Emoji sentiment ranking:
+http://kt.ijs.si/data/Emoji_sentiment_ranking/index.html
