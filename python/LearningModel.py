@@ -147,6 +147,7 @@ def dispatch_data(dataset, outputset):
 
 # TODO : problème de forme du tableau (sous-tableaux de taille différente → keras fait chier).
 #  Pistes : insérer l'info hashtags + emojis dans docvec ; casser le docvec et ajouter ses éléments au tableau de niveau supérieur
+#  Convertir également les données textuelles en chiffres (mapping)
 if __name__ == '__main__':
     tweets = util.get_all_tweets()
 

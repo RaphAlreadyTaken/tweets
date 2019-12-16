@@ -1,88 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2612cffd-bcd6-4d77-94d4-8fc9379c0ec2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="9ba0d408-eb6c-4b32-a26c-ebda126d3db6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tweets.iml" beforeDir="false" afterPath="$PROJECT_DIR$/tweets.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/src/fr/ceri/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/fr/ceri/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/src/fr/ceri/entities/HashtagProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/fr/ceri/entities/HashtagProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/LearningModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/LearningModel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tweets.iml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1UwQPOb2tWIVkV7xZsTCYZgtLqN" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="1" id="Add" />
-  </component>
+  <component name="ProjectId" id="1V3u0MhAyOIpSy8S9cXPEn0MzUx" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
-    <property name="Repository.Attach.Annotations" value="false" />
-    <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Raph\Documents\GitHub\tweets\java" />
-      <recent name="C:\Users\Raph\Documents\GitHub\tweets\src\fr\ceri\data\input" />
-      <recent name="C:\Users\Raph\Documents\GitHub\tweets\src\fr\ceri\data\config" />
-      <recent name="C:\Users\Raph\Documents\GitHub\tweets\src\fr\ceri\data\annotated" />
-    </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="CorpusAnnotation" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="tweets" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python/CorpusAnnotation.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.CorpusAnnotation" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -101,59 +49,16 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="2612cffd-bcd6-4d77-94d4-8fc9379c0ec2" name="Default Changelist" comment="" />
-      <created>1576265152062</created>
+      <changelist id="9ba0d408-eb6c-4b32-a26c-ebda126d3db6" name="Default Changelist" comment="" />
+      <created>1576493877127</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1576265152062</updated>
-      <workItem from="1576265153798" duration="1013000" />
-      <workItem from="1576426212352" duration="541000" />
+      <updated>1576493877127</updated>
+      <workItem from="1576493887652" duration="48000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="872" y="358" key="#Project_Structure" timestamp="1576269462614">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="872" y="358" key="#Project_Structure/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576269462614" />
-    <state x="1110" y="383" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1576265397020">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1110" y="383" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576265397020" />
-    <state width="2517" height="414" key="GridCell.Tab.0.bottom" timestamp="1576426753294">
-      <screen x="0" y="0" width="2560" height="1440" />
-    </state>
-    <state width="2517" height="414" key="GridCell.Tab.0.bottom/0.0.2560.1440/-1920.363.1920.1080/2560.360.1920.1040@0.0.2560.1440" timestamp="1576426753294" />
-    <state width="2517" height="414" key="GridCell.Tab.0.center" timestamp="1576426753294">
-      <screen x="0" y="0" width="2560" height="1440" />
-    </state>
-    <state width="2517" height="414" key="GridCell.Tab.0.center/0.0.2560.1440/-1920.363.1920.1080/2560.360.1920.1040@0.0.2560.1440" timestamp="1576426753294" />
-    <state width="2517" height="414" key="GridCell.Tab.0.left" timestamp="1576426753294">
-      <screen x="0" y="0" width="2560" height="1440" />
-    </state>
-    <state width="2517" height="414" key="GridCell.Tab.0.left/0.0.2560.1440/-1920.363.1920.1080/2560.360.1920.1040@0.0.2560.1440" timestamp="1576426753294" />
-    <state width="2517" height="414" key="GridCell.Tab.0.right" timestamp="1576426753294">
-      <screen x="0" y="0" width="2560" height="1440" />
-    </state>
-    <state width="2517" height="414" key="GridCell.Tab.0.right/0.0.2560.1440/-1920.363.1920.1080/2560.360.1920.1040@0.0.2560.1440" timestamp="1576426753294" />
-    <state x="760" y="282" key="SettingsEditor" timestamp="1576426551996">
-      <screen x="0" y="0" width="2560" height="1440" />
-    </state>
-    <state x="760" y="282" key="SettingsEditor/0.0.2560.1440/-1920.363.1920.1080/2560.360.1920.1040@0.0.2560.1440" timestamp="1576426551996" />
-    <state x="760" y="274" key="SettingsEditor/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576265398217" />
-    <state x="984" y="593" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1576265394179">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="984" y="593" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576265394179" />
-    <state x="663" y="320" key="new project wizard" timestamp="1576269428750">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="663" y="320" key="new project wizard/2560.142.1920.1040/0.0.2560.1400/-1920.453.1920.1080@0.0.2560.1400" timestamp="1576269428750" />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/tweets$CorpusAnnotation.coverage" NAME="CorpusAnnotation Coverage Results" MODIFIED="1576426516880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python" />
   </component>
 </project>
