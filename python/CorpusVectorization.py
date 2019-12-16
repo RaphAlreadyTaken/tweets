@@ -6,6 +6,8 @@ from gensim.models.doc2vec import TaggedDocument, Doc2Vec
 
 import util
 
+latest_model = "models/doc2vec/tweet_vectors_1576452758.1140864.model"
+
 
 def configure_model(local_documents):
     print("Configuring and building model")
@@ -25,7 +27,7 @@ def train_model(local_model, local_documents, epochs):
 
 def save_model(local_model):
     print("Saving model")
-    target_path = "models/tweet_vectors_{}.model".format(time.time())
+    target_path = "models/doc2vec/tweet_vectors_{}.model".format(time.time())
     local_model.save(target_path)
     print("Model saved to {}".format(target_path))
 
@@ -34,6 +36,9 @@ def assess_model(local_model, local_documents, taille_eval):
     """ Checks model performance against its training corpus
     https://radimrehurek.com/gensim/auto_examples/tutorials/run_doc2vec_lee.html#sphx-glr-auto-examples-tutorials-run-doc2vec-lee-py
     """
+    if taille_eval > 1000:
+        print("Warning: assessing large models can take a long time")
+
     print("Assessing model")
 
     ranks = []
@@ -44,9 +49,9 @@ def assess_model(local_model, local_documents, taille_eval):
     # Si le rank est 0, signifie que le vecteur généré par le modèle pour le tweet x est le plus similaire au inferred_vector qu'on vient de générer.
     # Dans le résultat final, on veut vérifier qu'on a un maximum de ranks à 0 ou 1 (tweets similaires à eux-mêmes).
     for tweet_id, tweet_text in local_documents.items():
-        inferred_vector = local_model.infer_vector(tweet_text)
+        inferred_vector = infer_vector(tweet_text)
         sims = local_model.docvecs.most_similar([inferred_vector], topn=len(local_model.docvecs))
-        print("Assessing tweet {}".format(tweet_id))
+        print("Testing tweet {}".format(tweet_id))
         rank = [tweet_id for tweet_id, sim in sims].index(tweet_id)
         ranks.append(rank)
 
@@ -65,16 +70,25 @@ def get_vectors_from_model(local_model):
     return local_model.docvecs.vectors_docs
 
 
+def infer_vector(tweet_message):
+    local_model = get_model(latest_model)
+    return local_model.infer_vector(tweet_message)
+
+
 if __name__ == '__main__':
-    tweet_messages = util.get_messages_as_dict()
+    tweets = util.get_all_tweets()
+    tweet_messages = util.get_messages_as_dict(tweets)
+
     # model, documents = configure_model(tweet_messages)
     # train_model(model, documents, 100)
     # save_model(model)
 
-    model = get_model("models/tweet_vectors_1576409907.8980725.model")
-    vectors = get_vectors_from_model(model)
+    model = get_model(latest_model)
+    # vectors = get_vectors_from_model(model)
 
     # for vector in vectors:
     #     pprint(vector)
 
-    assess_model(model, tweet_messages, 10000)
+    assess_model(model, tweet_messages, 1000)
+
+    # TODO: test sur nouveau tweet (comparaison visuelle avec most_similar). Penser à normaliser avant.

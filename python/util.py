@@ -1,17 +1,19 @@
 import json
 import re
-
 import nltk
+
 from elasticsearch import Elasticsearch, exceptions
+from nltk import SnowballStemmer
+
+from CorpusVectorization import infer_vector
 
 nltk.download("stopwords")
 
 # Regex for emoticons: http://sentiment.christopherpotts.net/tokenizing.html
-
 # Code original (avant modifs): https://kb.objectrocket.com/elasticsearch/how-to-use-python-to-make-scroll-queries-to-get-all-documents-in-an-elasticsearch-index-752
-from nltk import SnowballStemmer
 
 
+# TODO : écrire sur disque (long à relancer à chaque fois)
 def get_all_tweets():
     # declare globals for the Elasticsearch client host
     DOMAIN = "localhost"
@@ -143,14 +145,54 @@ def clean_full(message):
     retour_split = format_message_split(retour_split)
     return retour_split
 
-# TODO : écrire sur disque (long à relancer à chaque fois pour vectorisation)
-def get_messages_as_dict():
+
+def get_messages_as_dict(tweets):
     messages = {}
-    tweets = get_all_tweets()
 
     for i, s in enumerate(tweets):
-        tweet_id = s['_id']
-        tweet_text = clean_full(s['_source']['message'])
+        tweet_id, tweet_text = get_message_as_dict(s)
         messages[tweet_id] = tweet_text
 
     return messages
+
+
+def get_message_as_dict(tweet):
+    tweet_id = tweet['_id']
+    tweet_text = clean_full(tweet['_source']['message'])
+    return tweet_id, tweet_text
+
+
+# TODO : écrire dans un fichier (long)
+def prepare_learning_data(tweets):
+    formatted_input_data = []
+
+    for tweet in tweets:
+        print("Preparing tweet {}".format(tweet["_id"]))
+
+        tweet_data = {"id": tweet["_id"]}
+
+        _, tweet_text = get_message_as_dict(tweet)
+        tweet_vectorized = infer_vector(tweet_text)
+        tweet_data["message"] = tweet_vectorized
+
+        # TODO : voir si utile (pas présent dans corpus de test)
+        # tweet_data["username"] = tweet["_source"]["username"]
+
+        # tweet_data["hashtags"] = []
+        #
+        # for hashtag in tweet["_source"]["hashtags"]:
+        #     tweet_data["hashtags"].append(hashtag["text"])
+
+        # TODO : voir si utile (pas présent dans corpus de test)
+        # tweet_data["date"] = tweet["_source"]["date"]
+
+        # TODO : appeler méthode permettant d'extraire les emojis
+        tweet_data["emojis"] = 0
+
+        formatted_input_data.append(tweet_data)
+
+        # TODO: temporaire, à supprimer
+        if tweet["_id"] == "10":
+            break
+
+    return formatted_input_data
