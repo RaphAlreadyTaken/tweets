@@ -18,7 +18,7 @@ public class HashtagProcessor
     public HashtagProcessor()
     {
         hashMap = new HashMap<>();
-        targetDataFile = "src/main/java/fr/ceri/data/raw/hashtags.json";
+        targetDataFile = "../common/data/raw/hashtags.json";
         mapper = new ObjectMapper();
     }
 

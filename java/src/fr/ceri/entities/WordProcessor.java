@@ -21,8 +21,8 @@ public class WordProcessor
     public WordProcessor()
     {
         wordList = new HashMap<>();
-        inputFile = "src/fr/ceri/data/external/FEEL.csv";
-        targetDataFile = "src/fr/ceri/data/annotated/words.json";
+        inputFile = "../common/data/external/FEEL.csv";
+        targetDataFile = "../common/data/annotated/words.json";
     }
 
     public Map<String, String> getWordList()

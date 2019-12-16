@@ -3,17 +3,17 @@ import json
 import util
 
 # Writing emojis polarity to file
-# with open('../java/src/fr/ceri/data/annotated/emojis.json', 'w') as file:
-#     json.dump(util.load_emoji_classification('../java/src/fr/ceri/data/external/Emoji_Sentiment_Data_v1.0.csv'), file)
+# with open('../common/data/annotated/emojis.json', 'w') as file:
+#     json.dump(util.load_emoji_classification('../common/data/external/Emoji_Sentiment_Data_v1.0.csv'), file)
 
 # Loading dictionnaries from files
-with open('../java/src/fr/ceri/data/annotated/hashtags.json', 'r') as file:
+with open('../common/data/annotated/hashtags.json', 'r') as file:
     dict_hashtags = json.load(file)
 
-with open('../java/src/fr/ceri/data/annotated/words.json', 'r') as file:
+with open('../common/data/annotated/words.json', 'r') as file:
     dict_words = json.load(file)
 
-with open('../java/src/fr/ceri/data/annotated/emojis.json', 'r') as file:
+with open('../common/data/annotated/emojis.json', 'r') as file:
     dict_emojis = json.load(file)
 
 # dict_hashtags = {'#irrespect': "negatif", "#2017LeDebat": "neutre", "#Joie": "positif"}
@@ -102,5 +102,5 @@ for tweet in data:
 # print(cptEmoji)
 # print(cptTweetAvecEmoji)
 
-with open('../java/src/fr/ceri/data/annotated/apprentissage.json', 'w') as file:
+with open('../common/data/annotated/apprentissage.json', 'w') as file:
     json.dump(tweets_polarity, file)
