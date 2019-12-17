@@ -1,10 +1,13 @@
+import itertools
 import json
 import os
 from math import floor
 
+import numpy as np
 from keras import Sequential, metrics
 from keras.engine.saving import load_model
 from keras.layers import Dense
+from keras.utils import to_categorical
 
 import util
 
@@ -12,7 +15,9 @@ model_dir = "models\\keras"
 best_model_dir = model_dir + "\\overall_best"
 best_model_path = model_dir + best_model_dir + "\\best_model.hdf5"
 
-output_classes = ["negatif", "positif", "mixte", "autre"]
+output_classes = to_categorical([-1, 1, 0, 2], num_classes=4, dtype="int")
+output_map = {"negatif": output_classes[0], "positif": output_classes[1], "mixte": output_classes[2],
+              "autre": output_classes[3]}
 
 
 def configure_model(input_size, output_size):
@@ -116,47 +121,37 @@ def display_models():
 
 
 def dispatch_data(dataset, outputset):
-    # Data size
-    taille = len(dataset)
-
     # Sub-datasets allocation
-    training_size = floor(taille * 0.8)
-    validation_size = floor(taille * 0.2)
+    training_size = floor(len(dataset) * 0.8)
 
     # Dataset split
-    local_training_data = dataset[:training_size]
-    local_validation_data = dataset[training_size + 1: training_size + validation_size]
-
+    local_training_data = []
+    local_validation_data = []
     local_training_output = []
     local_validation_output = []
 
-    for i, s in enumerate(local_training_data):
-        local_training_output.append(outputset.get(s["id"]))
-        del local_training_data[i]["id"]
-        local_training_data[i] = list(s.values())
+    for i, s in enumerate(dataset[:training_size]):
+        local_training_output.append(output_map.get(outputset.get(s["id"])))
+        local_training_data.append(list(itertools.chain(s["message"], s["hashtags"], s["emojis"])))
 
-    print(local_training_data)
-
-    for i, s in enumerate(local_validation_data):
-        local_validation_output.append(outputset.get(s["id"]))
-        del local_validation_data[i]["id"]
-        local_validation_data[i] = list(s.values())
+    for i, s in enumerate(dataset[training_size:]):
+        local_validation_output.append(output_map.get(outputset.get(s["id"])))
+        local_validation_data.append(list(itertools.chain(s["message"], s["hashtags"], s["emojis"])))
 
     return local_training_data, local_training_output, local_validation_data, local_validation_output
 
 
 # TODO : problème de forme du tableau (sous-tableaux de taille différente → keras fait chier).
-#  Pistes : insérer l'info hashtags + emojis dans docvec ; casser le docvec et ajouter ses éléments au tableau de niveau supérieur
+#  Pistes : insérer l'info hashtags + emojis dans docvec
 #  Convertir également les données textuelles en chiffres (mapping)
 if __name__ == '__main__':
     tweets = util.get_all_tweets()
 
-    with open("../java/src/fr/ceri/data/annotated/apprentissage.json", 'r') as f:
+    with open("../common/data/annotated/apprentissage.json", 'r') as f:
         polarites = json.load(f)
 
     data = util.prepare_learning_data(tweets)
     training_data, training_output, validation_data, validation_output = dispatch_data(data, polarites)
 
-    model = configure_model(len(data[0]), len(output_classes))
-    model.fit(training_data, training_output, epochs=1200, verbose=1,
-              validation_data=(validation_data, validation_output))
+    model = configure_model(len(training_data[0]), len(output_map))
+    model.fit(np.array(training_data), np.array(training_output), epochs=1200, verbose=1)

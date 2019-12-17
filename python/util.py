@@ -137,6 +137,20 @@ def clean_message(message):
     return retour
 
 
+def clean_message_light(message):
+    retour = remove_username(message)
+    retour = remove_url(retour)
+    retour = remove_punctuation(retour)
+    retour = retour.replace('.', ' ')
+
+    retour = re.sub(' +', ' ', retour)  # enlever les multiples espaces
+    retour = retour.strip()  # enlever les trailing spaces
+
+    retour = retour.lower()  # tout minuscule
+
+    return retour
+
+
 def format_message_split(message):
     retour = remove_elisions(message)
     retour = lemmatize(retour)
@@ -170,6 +184,9 @@ def get_message_as_dict(tweet):
 def prepare_learning_data(tweets):
     formatted_input_data = []
 
+    with open('../common/data/raw/hashtags.json', 'r', encoding="utf-8") as file:
+        dict_hashtags = json.load(file)
+
     for tweet in tweets:
         print("Preparing tweet {}".format(tweet["_id"]))
 
@@ -182,16 +199,21 @@ def prepare_learning_data(tweets):
         # TODO : voir si utile (pas présent dans corpus de test)
         # tweet_data["username"] = tweet["_source"]["username"]
 
-        # tweet_data["hashtags"] = []
-        #
-        # for hashtag in tweet["_source"]["hashtags"]:
-        #     tweet_data["hashtags"].append(hashtag["text"])
+        tweet_data["hashtags"] = []
+
+        for hashtag in tweet["_source"]["hashtags"]:
+            id_hashtag = dict_hashtags.get(hashtag["text"])
+
+            if id_hashtag is None:
+                tweet_data["hashtags"].append(0)
+            else:
+                tweet_data["hashtags"].append(dict_hashtags.get(hashtag["text"]))
 
         # TODO : voir si utile (pas présent dans corpus de test)
         # tweet_data["date"] = tweet["_source"]["date"]
 
         # TODO : appeler méthode permettant d'extraire les emojis
-        tweet_data["emojis"] = 0
+        tweet_data["emojis"] = [0]
 
         formatted_input_data.append(tweet_data)
 
