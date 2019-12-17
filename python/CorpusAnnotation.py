@@ -17,7 +17,7 @@ with open('../common/data/annotated/emojis.json', 'r') as file:
     dict_emojis = json.load(file)
 
 heavy_negatives_list = util.load_list_from_file('../common/data/annotated/heavy_negatives.txt')
-midly_heavy_negatives_list = util.load_list_from_file('../common/data/annotated/midly_heavy_negatives.txt')
+mildly_heavy_negatives_list = util.load_list_from_file('../common/data/annotated/midly_heavy_negatives.txt')
 
 # print(midly_heavy_negatives_list)
 
@@ -49,23 +49,18 @@ for tweet in data:
 
     # Get emojis
     message_emojis = util.get_emojis(message)
-    # if len(message_emojis) > 0:
-    # print( tweet['_id'], ':', message_emojis)
-    # cptTweetAvecEmoji+=1
 
     message_clean = util.clean_message(message)
-    # print(message_clean)
 
     message_clean_splitted = message_clean.split()
     message_clean_splitted = util.remove_elisions(message_clean_splitted)
-
 
     is_annotated = False
     for mot in message_clean_splitted:
         if mot in heavy_negatives_list:
             tweet_polarity = "negatif"
             is_annotated = True
-        elif mot in midly_heavy_negatives_list:
+        elif mot in mildly_heavy_negatives_list:
             tweet_polarity = "negatif"
             # print(message_clean)
             is_annotated = True
