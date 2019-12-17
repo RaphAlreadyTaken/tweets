@@ -1,17 +1,20 @@
+import ast
+import csv
 import json
 import re
-import nltk
 
+import demoji
+import nltk
+import pandas as pd
 from elasticsearch import Elasticsearch, exceptions
+from keras.utils import to_categorical
 from nltk import SnowballStemmer
 
 from CorpusVectorization import infer_vector
 
-import demoji
-import csv
-
 demoji.download_codes()
 nltk.download("stopwords")
+
 
 # Regex for emoticons: http://sentiment.christopherpotts.net/tokenizing.html
 # Code original (avant modifs): https://kb.objectrocket.com/elasticsearch/how-to-use-python-to-make-scroll-queries-to-get-all-documents-in-an-elasticsearch-index-752
@@ -164,11 +167,28 @@ def clean_full(message):
     return retour_split
 
 
+def clean_light(message):
+    retour = clean_message_light(message)
+    retour_split = retour.split()
+    retour_split = format_message_split(retour_split)
+    return retour_split
+
+
 def get_messages_as_dict(tweets):
     messages = {}
 
     for i, s in enumerate(tweets):
         tweet_id, tweet_text = get_message_as_dict(s)
+        messages[tweet_id] = tweet_text
+
+    return messages
+
+
+def get_messages_full_as_dict(tweets):
+    messages = {}
+
+    for i, s in enumerate(tweets):
+        tweet_id, tweet_text = get_message_full_as_dict(s)
         messages[tweet_id] = tweet_text
 
     return messages
@@ -180,12 +200,26 @@ def get_message_as_dict(tweet):
     return tweet_id, tweet_text
 
 
-# TODO : écrire dans un fichier (long)
+def get_message_test_as_dict(tweet):
+    tweet_id = tweet['_id']
+    tweet_text = clean_full(tweet['message'])
+    return tweet_id, tweet_text
+
+
+def get_message_full_as_dict(tweet):
+    tweet_id = tweet['_id']
+    tweet_text = clean_light(tweet['_source']['message'])
+    return tweet_id, tweet_text
+
+
+def get_message_test_full_as_dict(tweet):
+    tweet_id = tweet['_id']
+    tweet_text = clean_light(tweet['message'])
+    return tweet_id, tweet_text
+
+
 def prepare_learning_data(tweets):
     formatted_input_data = []
-
-    with open('../common/data/raw/hashtags.json', 'r', encoding="utf-8") as file:
-        dict_hashtags = json.load(file)
 
     for tweet in tweets:
         print("Preparing tweet {}".format(tweet["_id"]))
@@ -194,36 +228,53 @@ def prepare_learning_data(tweets):
 
         _, tweet_text = get_message_as_dict(tweet)
         tweet_vectorized = infer_vector(tweet_text)
-        tweet_data["message"] = tweet_vectorized
-
-        # TODO : voir si utile (pas présent dans corpus de test)
-        # tweet_data["username"] = tweet["_source"]["username"]
-
-        tweet_data["hashtags"] = []
-
-        for hashtag in tweet["_source"]["hashtags"]:
-            id_hashtag = dict_hashtags.get(hashtag["text"])
-
-            if id_hashtag is None:
-                tweet_data["hashtags"].append(0)
-            else:
-                tweet_data["hashtags"].append(dict_hashtags.get(hashtag["text"]))
-
-        # TODO : voir si utile (pas présent dans corpus de test)
-        # tweet_data["date"] = tweet["_source"]["date"]
-
-        # TODO : appeler méthode permettant d'extraire les emojis
-        tweet_data["emojis"] = [0]
-
+        tweet_data["message"] = pd.Series(tweet_vectorized).to_json(orient='values')
         formatted_input_data.append(tweet_data)
 
-        # TODO: temporaire, à supprimer
-        if tweet["_id"] == "10":
-            break
+    with open('../common/data/trained/vectors.json', 'w', encoding="utf-8") as file:
+        json.dump(formatted_input_data, file)
 
     return formatted_input_data
 
-    
+
+def prepare_learning_data_full(tweets):
+    formatted_input_data = []
+
+    for tweet in tweets:
+        print("Preparing tweet {}".format(tweet["_id"]))
+
+        tweet_data = {"id": tweet["_id"]}
+
+        _, tweet_text = get_message_full_as_dict(tweet)
+        tweet_vectorized = infer_vector(tweet_text)
+        tweet_data["message"] = ast.literal_eval(pd.Series(tweet_vectorized).to_json(orient='values'))
+        formatted_input_data.append(tweet_data)
+
+    with open('../common/data/trained/vectors.json', 'w', encoding="utf-8") as file:
+        json.dump(formatted_input_data, file)
+
+    return formatted_input_data
+
+
+def prepare_test_data_full(tweets):
+    formatted_input_data = []
+
+    for tweet in tweets:
+        print("Preparing tweet {}".format(tweet["_id"]))
+
+        tweet_data = {"id": tweet["_id"]}
+
+        _, tweet_text = get_message_test_full_as_dict(tweet)
+        tweet_vectorized = infer_vector(tweet_text)
+        tweet_data["message"] = ast.literal_eval(pd.Series(tweet_vectorized).to_json(orient='values'))
+        formatted_input_data.append(tweet_data)
+
+    with open('../common/data/trained/vectors_test.json', 'w', encoding="utf-8") as file:
+        json.dump(formatted_input_data, file)
+
+    return formatted_input_data
+
+
 # Source: https://pypi.org/project/demoji/
 def get_emojis(message):
     # # Regex to match emojis
