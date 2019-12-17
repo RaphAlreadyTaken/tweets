@@ -86,6 +86,7 @@ def remove_punctuation(message):
     retour = message.replace(',', ' ')
     retour = retour.replace(':', ' ')
     retour = retour.replace('.', ' . ')
+    retour = retour.replace('"', ' " ')
     return retour
 
 
@@ -263,3 +264,16 @@ def load_emoji_classification(filepath):
                     retour[row[0]] = "positif"
 
     return retour
+
+
+def load_list_from_file(filename):
+    return_list = [line.rstrip('\n') for line in open(filename)]
+    return return_list
+
+def get_polarity_from_score(score):
+    if score > 0:
+        return "positif"
+    elif score < 0:
+        return "negatif"
+    else:
+        return "mixte"
