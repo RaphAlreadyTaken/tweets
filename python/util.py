@@ -7,7 +7,6 @@ import demoji
 import nltk
 import pandas as pd
 from elasticsearch import Elasticsearch, exceptions
-from keras.utils import to_categorical
 from nltk import SnowballStemmer
 
 from CorpusVectorization import infer_vector
@@ -321,6 +320,7 @@ def load_list_from_file(filename):
     return_list = [line.rstrip('\n') for line in open(filename)]
     return return_list
 
+
 def get_polarity_from_score(score):
     if score > 0:
         return "positif"
@@ -328,3 +328,21 @@ def get_polarity_from_score(score):
         return "negatif"
     else:
         return "mixte"
+
+
+def get_word_frequencies():
+    tweets = get_all_tweets()
+    words = get_messages_as_dict(tweets)
+    frequencies = {}
+
+    for word in words.values():
+        for w in word:
+            if w in frequencies:
+                frequencies[w] += 1
+            else:
+                frequencies[w] = 0
+
+    frequencies = sorted(frequencies.items(), key=lambda x: x[1], reverse=True)
+
+    # Fucking fuck encoding
+    print(frequencies)
