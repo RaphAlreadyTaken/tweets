@@ -6,7 +6,7 @@ from gensim.models.doc2vec import TaggedDocument, Doc2Vec
 
 import util
 
-latest_model = "models/doc2vec/tweet_vectors_1576452758.1140864.model"
+latest_model = "models/doc2vec/tweet_vectors_1576546752.5376565.model"
 
 
 def configure_model(local_documents):
@@ -77,14 +77,14 @@ def infer_vector(tweet_message):
 
 if __name__ == '__main__':
     tweets = util.get_all_tweets()
-    tweet_messages = util.get_messages_as_dict(tweets)
+    tweet_messages = util.get_messages_full_as_dict(tweets)
 
     # model, documents = configure_model(tweet_messages)
     # train_model(model, documents, 100)
     # save_model(model)
 
     model = get_model(latest_model)
-    # vectors = get_vectors_from_model(model)
+    vectors = get_vectors_from_model(model)
 
     # for vector in vectors:
     #     pprint(vector)
