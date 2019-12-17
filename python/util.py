@@ -321,6 +321,7 @@ def load_list_from_file(filename):
     return_list = [line.rstrip('\n') for line in open(filename)]
     return return_list
 
+
 def get_polarity_from_score(score):
     if score > 0:
         return "positif"
