@@ -84,6 +84,19 @@ def get_all_tweets():
         return retour
 
 
+def get_all_unique_tweets():
+    tweets = get_all_tweets()
+    messages = []
+
+    for i, s in enumerate(tweets):
+        if s["_source"]["message"] in messages:
+            tweets.pop(i)
+        else:
+            messages.append(s)
+
+    return len(tweets)
+
+
 def remove_punctuation(message):
     retour = message.replace(',', ' ')
     retour = retour.replace(':', ' ')
