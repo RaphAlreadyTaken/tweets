@@ -2,6 +2,7 @@ out
 target
 .idea
 *.iml
+venv_tweets
 venv_tweet
 logs
 
