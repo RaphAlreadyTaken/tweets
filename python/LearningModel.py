@@ -1,12 +1,10 @@
 import json
-import os
 import time
 from math import floor
 
 import numpy as np
-from keras import Sequential, metrics
+from keras import Sequential
 from keras.callbacks import ModelCheckpoint, EarlyStopping, TensorBoard
-from keras.engine.saving import load_model
 from keras.layers import Dense
 from keras.utils import to_categorical
 
@@ -70,10 +68,10 @@ if __name__ == '__main__':
     with open("../common/data/annotated/apprentissage.json", 'r') as f:
         polarites = json.load(f)
 
-    # WARNING: très long, à ne faire qu'une fois (résultat dans common/trained/vectors.json)
+    # WARNING: très long, à ne faire qu'une fois (résultat dans common/trained/vectors_xx.json)
     # data = util.prepare_learning_data_full(tweets)
 
-    with open("../common/data/trained/vectors_v1.json", 'r') as f:
+    with open("../common/data/trained/vectors_v2.json", 'r') as f:
         data = json.load(f)
 
     training_data, training_output, validation_data, validation_output = dispatch_data(data, polarites)
@@ -92,8 +90,8 @@ if __name__ == '__main__':
                                  verbose=0, save_best_only=True, save_weights_only=False, mode="auto", period=1)
 
     # Callback EarlyStopping
-    earlystop = EarlyStopping(monitor="val_loss", mode="min", verbose=1, patience=10)
+    earlystop = EarlyStopping(monitor="val_categorical_accuracy", mode="max", verbose=1, patience=10)
 
-    model.fit(np.array(training_data), np.array(training_output), epochs=500, verbose=1,
+    model.fit(np.array(training_data), np.array(training_output), epochs=1000, verbose=1,
               validation_split=0.2, shuffle=True,
-              callbacks=[checkpoint, tensorboard])
+              callbacks=[checkpoint, earlystop])
