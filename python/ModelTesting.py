@@ -23,7 +23,7 @@ def evaluate_all_models():
         # Chargement des modèles
         if os.path.isfile(file_path):
             # TODO : condition à supprimer quand les données vectorisées seront calculées (v2)
-            if file == "opti1576596945.2448676.hdf5":
+            if file == "opti1576631042.9595923.hdf5":
                 model = load_model(file_path)
 
                 output = []

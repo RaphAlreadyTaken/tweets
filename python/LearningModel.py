@@ -16,7 +16,7 @@ model_dir = "models\\keras"
 best_model_dir = model_dir + "\\overall_best"
 best_model_path = model_dir + best_model_dir + "\\best_model.hdf5"
 
-output_classes = to_categorical([-1, 1, 0, 2], num_classes=4, dtype="int")
+output_classes = to_categorical([0, 1, 2, 3], num_classes=4, dtype="int")
 output_map = {"negatif": output_classes[0], "positif": output_classes[1], "mixte": output_classes[2],
               "neutre": output_classes[3]}
 
@@ -37,7 +37,7 @@ def configure_model(input_size, output_size):
 
     local_model.add(Dense(output_size, activation="softmax"))
 
-    local_model.compile(loss="categorical_crossentropy", optimizer="Adam",
+    local_model.compile(loss="categorical_crossentropy", optimizer="Adadelta",
                         metrics=["categorical_accuracy"])
 
     return local_model
@@ -67,33 +67,33 @@ def dispatch_data(dataset, outputset):
 if __name__ == '__main__':
     tweets = util.get_all_tweets()
 
-    # with open("../common/data/annotated/apprentissage.json", 'r') as f:
-    #     polarites = json.load(f)
+    with open("../common/data/annotated/apprentissage.json", 'r') as f:
+        polarites = json.load(f)
 
     # WARNING: très long, à ne faire qu'une fois (résultat dans common/trained/vectors.json)
-    data = util.prepare_learning_data_full(tweets)
+    # data = util.prepare_learning_data_full(tweets)
 
-    # with open("../common/data/trained/vectors_clean.json", 'r') as f:
-    #     data = json.load(f)
-    #
-    # training_data, training_output, validation_data, validation_output = dispatch_data(data, polarites)
-    #
-    # model = configure_model(len(training_data[0]), len(output_map))
-    #
-    # model_training_time = time.time()
-    #
-    # # Callback Tensorboard
-    # tensorboard = TensorBoard(log_dir="logs\\{}".format(model_training_time),
-    #                           write_graph=True)
-    #
-    # # Callback ModelCheckpoint
-    # checkpoint = ModelCheckpoint("{}\\opti{}.hdf5".format(model_dir, model_training_time),
-    #                              monitor="val_loss",
-    #                              verbose=0, save_best_only=True, save_weights_only=False, mode="auto", period=1)
-    #
-    # # Callback EarlyStopping
-    # earlystop = EarlyStopping(monitor="val_loss", mode="min", verbose=1)
-    #
-    # model.fit(np.array(training_data), np.array(training_output), epochs=500, verbose=1,
-    #           validation_data=(np.array(validation_data), np.array(validation_output)),
-    #           callbacks=[checkpoint, tensorboard, earlystop])
+    with open("../common/data/trained/vectors_v1.json", 'r') as f:
+        data = json.load(f)
+
+    training_data, training_output, validation_data, validation_output = dispatch_data(data, polarites)
+
+    model = configure_model(len(training_data[0]), len(output_map))
+
+    model_training_time = time.time()
+
+    # Callback Tensorboard
+    tensorboard = TensorBoard(log_dir="logs\\{}".format(model_training_time),
+                              write_graph=True)
+
+    # Callback ModelCheckpoint
+    checkpoint = ModelCheckpoint("{}\\opti{}.hdf5".format(model_dir, model_training_time),
+                                 monitor="categorical_accuracy",
+                                 verbose=0, save_best_only=True, save_weights_only=False, mode="auto", period=1)
+
+    # Callback EarlyStopping
+    earlystop = EarlyStopping(monitor="val_loss", mode="min", verbose=1, patience=10)
+
+    model.fit(np.array(training_data), np.array(training_output), epochs=500, verbose=1,
+              validation_split=0.2, shuffle=True,
+              callbacks=[checkpoint, tensorboard])
