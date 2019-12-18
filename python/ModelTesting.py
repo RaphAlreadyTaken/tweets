@@ -3,7 +3,6 @@ import os
 
 import numpy as np
 from keras.engine.saving import load_model
-from keras.metrics import CategoricalAccuracy
 
 from util import prepare_test_data_full
 
@@ -19,23 +18,24 @@ def evaluate_all_models():
     # Evaluate all models
     for file in os.listdir(local_model_dir):
         file_path = os.path.join(local_model_dir, file)
+        output_file = "../common/data/metrics/result_{}.txt".format(file)
 
         # Chargement des modèles
         if os.path.isfile(file_path):
-            # TODO : condition à supprimer quand les données vectorisées seront calculées (v2)
-            if file == "opti1576631042.9595923.hdf5":
+            if os.path.isfile(output_file):
+                print("Test file for model {} already exists, skipping...".format(file))
+            else:
+                print("Generating test file for model {} ...".format(file))
                 model = load_model(file_path)
 
                 output = []
 
                 for data in test_data:
-                    output_predict = model.predict(np.array([np.array(data["message"])]))
-                    print(output_predict)
                     output_class = model.predict_classes(np.array([np.array(data["message"])]))
                     output_class = classes.get(output_class[0])
                     output.append([data["id"], output_class])
 
-                with open("../common/data/metrics/result.txt", 'w', encoding="utf-8") as f:
+                with open(output_file, 'w', encoding="utf-8") as f:
                     for result in output:
                         f.write("{} {}\n".format(result[0], result[1]))
 

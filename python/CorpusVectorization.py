@@ -1,6 +1,5 @@
 import collections
 import time
-from pprint import pprint
 
 from gensim.models.doc2vec import TaggedDocument, Doc2Vec
 
