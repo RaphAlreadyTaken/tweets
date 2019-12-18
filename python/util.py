@@ -299,19 +299,26 @@ def get_emojis(message):
 
 def load_emoji_classification(filepath):
     retour = {}
-
+    seuil = 50
     with open(filepath, 'r', encoding="utf8") as file:
         reader = csv.reader(file)
         for row in reader:
             if row[0] != 'Emoji':
-                if int(row[4]) > int(row[5]):
-                    retour[row[0]] = "negatif"
-                    max_value = int(row[4])
-                else:
-                    retour[row[0]] = "neutre"
-                    max_value = int(row[5])
-                if max_value < int(row[6]):
-                    retour[row[0]] = "positif"
+                if int(row[2]) > seuil:
+                    currentCat = row[8]
+                    if currentCat == 'Emoticons' or \
+                            currentCat == 'Dingbats' or \
+                            currentCat == 'Miscellaneous Symbols' or \
+                            currentCat == 'Miscellaneous Symbols and Pictographs':
+                        print(currentCat)
+                        if int(row[4]) > int(row[5]):
+                            retour[row[0]] = "negatif"
+                            max_value = int(row[4])
+                        else:
+                            retour[row[0]] = "neutre"
+                            max_value = int(row[5])
+                        if max_value < int(row[6]):
+                            retour[row[0]] = "positif"
 
     return retour
 

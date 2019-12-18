@@ -3,8 +3,8 @@ import json
 import util
 
 # Writing emojis polarity to file
-# with open('../common/data/annotated/emojis.json', 'w') as file:
-#     json.dump(util.load_emoji_classification('../common/data/external/Emoji_Sentiment_Data_v1.0.csv'), file)
+with open('../common/data/annotated/emojis.json', 'w') as file:
+    json.dump(util.load_emoji_classification('../common/data/external/Emoji_Sentiment_Data_v1.0.csv'), file)
 
 # Loading dictionnaries from files
 with open('../common/data/annotated/hashtags.json', 'r') as file:
@@ -36,8 +36,9 @@ data = util.get_all_tweets()
 tweets_polarity = {}
 
 cptMot = 0
-# cptEmoji = 0
+cptEmoji = 0
 # cptTweetAvecEmoji = 0
+
 for tweet in data:
     # print(tweet['_source']['message'])
     tweet_polarity = "neutre"
@@ -56,29 +57,29 @@ for tweet in data:
     message_clean_splitted = util.remove_elisions(message_clean_splitted)
 
     is_annotated = False
-    for mot in message_clean_splitted:
-        if mot in heavy_negatives_list:
-            tweet_polarity = "negatif"
-            is_annotated = True
-        elif mot in mildly_heavy_negatives_list:
-            tweet_polarity = "negatif"
-            # print(message_clean)
-            is_annotated = True
+    # for mot in message_clean_splitted:
+    #     if mot in heavy_negatives_list:
+    #         tweet_polarity = "negatif"
+    #         is_annotated = True
+    #     elif mot in mildly_heavy_negatives_list:
+    #         tweet_polarity = "negatif"
+    #         # print(message_clean)
+    #         is_annotated = True
 
     if is_annotated is False:
         message_clean = util.lemmatize(message_clean_splitted)
 
         ########### Hashtags ###########
-        score_hashtag = 0
-        hashtags = tweet['_source']['hashtags']
-        for curHashtagDict in hashtags:
-            if curHashtagDict is not False:
-                currentHashtag = curHashtagDict.get("text")
-                if dict_hashtags.get(currentHashtag) is not None:
-                    score_hashtag += int(dict_correspondances.get(dict_hashtags.get(currentHashtag)))
-        if score_hashtag is not 0:
-            tweet_polarity = util.get_polarity_from_score(score_hashtag)
-            is_annotated = True
+        # score_hashtag = 0
+        # hashtags = tweet['_source']['hashtags']
+        # for curHashtagDict in hashtags:
+        #     if curHashtagDict is not False:
+        #         currentHashtag = curHashtagDict.get("text")
+        #         if dict_hashtags.get(currentHashtag) is not None:
+        #             score_hashtag += int(dict_correspondances.get(dict_hashtags.get(currentHashtag)))
+        # if score_hashtag is not 0:
+        #     tweet_polarity = util.get_polarity_from_score(score_hashtag)
+        #     is_annotated = True
 
         if is_annotated is False:
             ########### Emojis ###########
@@ -89,37 +90,39 @@ for tweet in data:
                 if score_emoji is not 0:
                     tweet_polarity = util.get_polarity_from_score(score_emoji)
                     is_annotated = True
+                    cptEmoji += 1
 
             foundmot = False
 
             ########### Mots ###########
-            score_mot = 0
-            if is_annotated is False:
-                for mot in message_clean:
-                    if dict_words.get(mot) is not None:
-                        foundmot = True
-                        poids = int(dict_correspondances.get(dict_words.get(mot)))
-                        score_mot += poids
-                        if poids is not 0:
-                            isChanged = True
-
-            # Sauvegarde du score final du tweet
-            if isChanged is False:
-                tweet_polarity = "neutre"
-            else:
-                tweet_polarity = util.get_polarity_from_score(score_mot)
+            # score_mot = 0
+            # if is_annotated is False:
+            #     for mot in message_clean:
+            #         if dict_words.get(mot) is not None:
+            #             foundmot = True
+            #             poids = int(dict_correspondances.get(dict_words.get(mot)))
+            #             score_mot += poids
+            #             if poids is not 0:
+            #                 isChanged = True
+            #
+            # # Sauvegarde du score final du tweet
+            # if isChanged is False:
+            #     tweet_polarity = "neutre"
+            # else:
+            #     tweet_polarity = util.get_polarity_from_score(score_mot)
 
     # if tweet_score is not 0:
     #     print(tweet_score)
 
-    tweets_polarity[tweet['_id']] = tweet_polarity
+    if is_annotated is True:
+        tweets_polarity[tweet['_id']] = tweet_polarity
     # print(message_clean)
 
 # print(cptMot)
 # print(cptCount2)
 
 # print(tweets_polarity)
-# print(cptEmoji)
+print(cptEmoji)
 # print(cptTweetAvecEmoji)
 
 with open('../common/data/annotated/apprentissage.json', 'w') as file:
