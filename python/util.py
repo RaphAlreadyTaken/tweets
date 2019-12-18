@@ -86,15 +86,24 @@ def get_all_tweets():
 
 def get_all_unique_tweets():
     tweets = get_all_tweets()
+    original_size = len(tweets)
     messages = []
 
     for i, s in enumerate(tweets):
-        if s["_source"]["message"] in messages:
+        message = s["_source"]["message"]
+        if message in messages:
             tweets.pop(i)
         else:
-            messages.append(s)
+            messages.append(message)
 
-    return len(tweets)
+    final_size = len(tweets)
+
+    print("Original tweet number: {}".format(original_size))
+    print("Duplicates removed: {}".format(original_size - final_size))
+    print("Final tweet number: {}".format(final_size))
+
+    with open("../common/data/processed/unlabeled_unique.json", "w", encoding="utf8") as file:
+        json.dump(tweets, file, indent=4, sort_keys=True)
 
 
 def remove_punctuation(message):

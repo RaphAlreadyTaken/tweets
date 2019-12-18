@@ -5,7 +5,3 @@ target
 venv_tweets
 venv_tweet
 logs
-
-
-
-python/__pycache__/CorpusVectorization.cpython-37.pyc
