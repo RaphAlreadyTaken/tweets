@@ -327,12 +327,12 @@ def load_emoji_classification(filepath):
         for row in reader:
             if row[0] != 'Emoji':
                 if int(row[2]) > seuil:
-                    currentCat = row[8]
-                    if currentCat == 'Emoticons' or \
-                            currentCat == 'Dingbats' or \
-                            currentCat == 'Miscellaneous Symbols' or \
-                            currentCat == 'Miscellaneous Symbols and Pictographs':
-                        print(currentCat)
+                    current_cat = row[8]
+                    if current_cat == 'Emoticons' or \
+                            current_cat == 'Dingbats' or \
+                            current_cat == 'Miscellaneous Symbols' or \
+                            current_cat == 'Miscellaneous Symbols and Pictographs':
+                        print(current_cat)
                         if int(row[4]) > int(row[5]):
                             retour[row[0]] = "negatif"
                             max_value = int(row[4])

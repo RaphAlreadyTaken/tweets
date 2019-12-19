@@ -39,6 +39,14 @@ cptMot = 0
 cptEmoji = 0
 # cptTweetAvecEmoji = 0
 
+# Flags pour sélectionner quels critères utiliser
+hand_annotated_words_lists_flag = False
+hand_annotated_hashtags_lists_flag = False
+emojis_flag = True
+words_flag = False
+
+seuil_mots = 2
+
 for tweet in data:
     # print(tweet['_source']['message'])
     tweet_polarity = "neutre"
@@ -57,59 +65,62 @@ for tweet in data:
     message_clean_splitted = util.remove_elisions(message_clean_splitted)
 
     is_annotated = False
-    # for mot in message_clean_splitted:
-    #     if mot in heavy_negatives_list:
-    #         tweet_polarity = "negatif"
-    #         is_annotated = True
-    #     elif mot in mildly_heavy_negatives_list:
-    #         tweet_polarity = "negatif"
-    #         # print(message_clean)
-    #         is_annotated = True
+    if hand_annotated_words_lists_flag is True:
+        for mot in message_clean_splitted:
+            if mot in heavy_negatives_list:
+                tweet_polarity = "negatif"
+                is_annotated = True
+            elif mot in mildly_heavy_negatives_list:
+                tweet_polarity = "negatif"
+                # print(message_clean)
+                is_annotated = True
 
     if is_annotated is False:
         message_clean = util.lemmatize(message_clean_splitted)
 
         ########### Hashtags ###########
-        # score_hashtag = 0
-        # hashtags = tweet['_source']['hashtags']
-        # for curHashtagDict in hashtags:
-        #     if curHashtagDict is not False:
-        #         currentHashtag = curHashtagDict.get("text")
-        #         if dict_hashtags.get(currentHashtag) is not None:
-        #             score_hashtag += int(dict_correspondances.get(dict_hashtags.get(currentHashtag)))
-        # if score_hashtag is not 0:
-        #     tweet_polarity = util.get_polarity_from_score(score_hashtag)
-        #     is_annotated = True
+        if hand_annotated_hashtags_lists_flag is True:
+            score_hashtag = 0
+            hashtags = tweet['_source']['hashtags']
+            for curHashtagDict in hashtags:
+                if curHashtagDict is not False:
+                    currentHashtag = curHashtagDict.get("text")
+                    if dict_hashtags.get(currentHashtag) is not None:
+                        score_hashtag += int(dict_correspondances.get(dict_hashtags.get(currentHashtag)))
+            if score_hashtag is not 0:
+                tweet_polarity = util.get_polarity_from_score(score_hashtag)
+                is_annotated = True
 
         if is_annotated is False:
             ########### Emojis ###########
-            score_emoji = 0
-            for emoji in message_emojis:
-                if dict_emojis.get(emoji) is not None:
-                    score_emoji += int(dict_correspondances.get(dict_emojis.get(emoji)))
-                if score_emoji is not 0:
-                    tweet_polarity = util.get_polarity_from_score(score_emoji)
-                    is_annotated = True
-                    cptEmoji += 1
+            if emojis_flag is True:
+                score_emoji = 0
+                for emoji in message_emojis:
+                    if dict_emojis.get(emoji) is not None:
+                        score_emoji += int(dict_correspondances.get(dict_emojis.get(emoji)))
+                    if score_emoji is not 0:
+                        tweet_polarity = util.get_polarity_from_score(score_emoji)
+                        is_annotated = True
+                        cptEmoji += 1
 
-            foundmot = False
+            if is_annotated is False:
+                ########### Mots ###########
+                if words_flag is True:
+                    score_mot = 0
+                    poids = 0
+                    found_words_count = 0
+                    for mot in message_clean:
+                        if dict_words.get(mot) is not None:
+                            poids = int(dict_correspondances.get(dict_words.get(mot)))
+                            score_mot += poids
+                            if poids is not 0:
+                                isChanged = True
 
-            ########### Mots ###########
-            # score_mot = 0
-            # if is_annotated is False:
-            #     for mot in message_clean:
-            #         if dict_words.get(mot) is not None:
-            #             foundmot = True
-            #             poids = int(dict_correspondances.get(dict_words.get(mot)))
-            #             score_mot += poids
-            #             if poids is not 0:
-            #                 isChanged = True
-            #
-            # # Sauvegarde du score final du tweet
-            # if isChanged is False:
-            #     tweet_polarity = "neutre"
-            # else:
-            #     tweet_polarity = util.get_polarity_from_score(score_mot)
+                # Sauvegarde du score final du tweet
+                if isChanged is False:
+                    tweet_polarity = "neutre"
+                else:
+                    tweet_polarity = util.get_polarity_from_score(score_mot)
 
     # if tweet_score is not 0:
     #     print(tweet_score)
@@ -127,3 +138,7 @@ print(cptEmoji)
 
 with open('../common/data/annotated/apprentissage.json', 'w') as file:
     json.dump(tweets_polarity, file)
+
+
+################################ Notes:
+# Emojis seuls: très peu efficace. Problème: emojis avec doubles polarités (emoji qui pleure de rire par exemple).
