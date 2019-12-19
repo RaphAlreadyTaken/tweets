@@ -105,6 +105,8 @@ def get_all_unique_tweets():
     with open("../common/data/processed/unlabeled_unique.json", "w", encoding="utf8") as file:
         json.dump(tweets, file, indent=4, sort_keys=True)
 
+    return tweets
+
 
 def remove_punctuation(message):
     retour = message.replace(',', ' ')
@@ -332,7 +334,6 @@ def load_emoji_classification(filepath):
                             current_cat == 'Dingbats' or \
                             current_cat == 'Miscellaneous Symbols' or \
                             current_cat == 'Miscellaneous Symbols and Pictographs':
-                        print(current_cat)
                         if int(row[4]) > int(row[5]):
                             retour[row[0]] = "negatif"
                             max_value = int(row[4])
