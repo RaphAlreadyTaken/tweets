@@ -30,7 +30,7 @@ def configure_model(input_size, output_size):
     local_model = Sequential()
     local_model.add(Dense(100, input_dim=input_size, activation="relu"))
 
-    for i in range(7):
+    for j in range(7):
         local_model.add(Dense(100, activation="relu"))
 
     local_model.add(Dense(output_size, activation="softmax"))
@@ -51,19 +51,22 @@ def dispatch_data(dataset, outputset):
     local_training_output = []
     local_validation_output = []
 
-    for i, s in enumerate(dataset[:training_size]):
-        local_training_data.append(s["message"])
-        local_training_output.append(output_map.get(outputset.get(s["id"])))
+    for j, t in enumerate(dataset[:training_size]):
+        local_training_data.append(t["message"])
+        local_training_output.append(output_map.get(outputset.get(t["id"])))
 
-    for i, s in enumerate(dataset[training_size:]):
-        local_validation_data.append(s["message"])
-        local_validation_output.append(output_map.get(outputset.get(s["id"])))
+    for j, t in enumerate(dataset[training_size:]):
+        local_validation_data.append(t["message"])
+        local_validation_output.append(output_map.get(outputset.get(t["id"])))
 
     return local_training_data, local_training_output, local_validation_data, local_validation_output
 
 
 if __name__ == '__main__':
-    tweets = util.get_all_tweets()
+    # tweets = util.get_all_tweets()
+
+    with open("../common/data/processed/unlabeled_unique.json", "r") as file:
+        tweets = json.load(file)
 
     with open("../common/data/annotated/apprentissage.json", 'r') as f:
         polarites = json.load(f)
@@ -73,6 +76,14 @@ if __name__ == '__main__':
 
     with open("../common/data/trained/vectors_v2.json", 'r') as f:
         data = json.load(f)
+
+    actual_tweet_ids = [x["_id"] for x in tweets]
+    print(len(actual_tweet_ids))
+
+    # Filtrage pour conserver uniquement les tweets effectivement présents dans le corpus
+    for i, s in enumerate(data):
+        if s["id"] not in actual_tweet_ids:
+            data.pop(i)
 
     training_data, training_output, validation_data, validation_output = dispatch_data(data, polarites)
 
@@ -94,4 +105,4 @@ if __name__ == '__main__':
 
     model.fit(np.array(training_data), np.array(training_output), epochs=1000, verbose=1,
               validation_split=0.2, shuffle=True,
-              callbacks=[checkpoint, earlystop])
+              callbacks=[checkpoint])

@@ -31,8 +31,8 @@ dict_correspondances = {
     "neutre": 0
 }
 
-data = util.get_all_tweets()
-# data = util.get_all_unique_tweets()
+# data = util.get_all_tweets()
+data = util.get_all_unique_tweets()
 
 tweets_polarity = {}
 
