@@ -128,6 +128,7 @@ for tweet in data:
     if is_annotated is True:
         tweets_polarity[tweet['_id']] = tweet_polarity
 
+print("Number of tweets annotated: {}".format(len(tweets_polarity)))
 
 with open('../common/data/annotated/apprentissage.json', 'w') as file:
     json.dump(tweets_polarity, file)
