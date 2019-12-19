@@ -31,8 +31,8 @@ dict_correspondances = {
     "neutre": 0
 }
 
-# data = util.get_all_tweets()
-data = util.get_all_unique_tweets()
+data = util.get_all_tweets()
+# data = util.get_all_unique_tweets()
 
 tweets_polarity = {}
 
@@ -44,7 +44,7 @@ hand_annotated_hashtags_lists_flag = True
 emojis_flag = True
 words_flag = True
 
-seuil_mots = 3
+seuil_mots = 4
 
 for tweet in data:
     # print(tweet['_source']['message'])
@@ -118,11 +118,12 @@ for tweet in data:
                             isChanged = True
 
             # Sauvegarde du score final du tweet
-            # if isChanged is False:
-            #     tweet_polarity = "neutre"
-            # else:
-            tweet_polarity = util.get_polarity_from_score(score_tweet)
-            is_annotated = True
+            if isChanged is False:
+                tweet_polarity = "neutre"
+                is_annotated = True
+            else:
+                tweet_polarity = util.get_polarity_from_score(score_tweet)
+                is_annotated = True
 
     if is_annotated is True:
         tweets_polarity[tweet['_id']] = tweet_polarity

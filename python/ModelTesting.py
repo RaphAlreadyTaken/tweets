@@ -13,7 +13,7 @@ def evaluate_all_models():
 
     local_model_dir = "models\\keras"
 
-    classes = {0: "negatif", 1: "positif", 2: "mixte", 3: "neutre"}
+    classes = {0: "negatif", 1: "positif", 2: "mixte", 3: "autre"}
 
     # Evaluate all models
     for file in os.listdir(local_model_dir):
