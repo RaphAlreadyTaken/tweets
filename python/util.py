@@ -112,7 +112,7 @@ def remove_punctuation(message):
     retour = message.replace(',', ' ')
     retour = retour.replace(':', ' ')
     retour = retour.replace('.', ' . ')
-    retour = retour.replace('"', ' " ')
+    # retour = retour.replace('"', ' " ')
     retour = retour.replace('?', ' ? ')
     retour = retour.replace('!', ' ! ')
 
@@ -158,6 +158,21 @@ def clean_message(message):
     retour = remove_username(retour)
     retour = remove_url(retour)
     retour = remove_punctuation(retour)
+
+    retour = re.sub(' +', ' ', retour)  # enlever les multiples espaces
+    retour = retour.strip()  # enlever les trailing spaces
+
+    retour = retour.lower()  # tout minuscule
+
+    return retour
+
+
+def clean_message_keep_quotes(message):
+    retour = remove_hashtag(message)
+    retour = remove_username(retour)
+    retour = remove_url(retour)
+    retour = message.replace(',', ' ')
+    retour = retour.replace(':', ' ')
 
     retour = re.sub(' +', ' ', retour)  # enlever les multiples espaces
     retour = retour.strip()  # enlever les trailing spaces
