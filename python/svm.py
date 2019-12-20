@@ -92,7 +92,6 @@ def message_to_svm_format(message):
 
 
 def tweets_learning_to_svm_format():
-    lexique_dict = load_lexique_from_file()
     data_full = util.get_all_tweets()
     with open('../common/data/annotated/apprentissage.json', 'r') as file:
         data_annotated = json.load(file)
@@ -105,12 +104,12 @@ def tweets_learning_to_svm_format():
             tweet_message = tweet['_source']['message']
             # Cleaning message
             tweet_message_clean = clean_message(tweet_message)
+            # to get progress
             print(annotated_tweet)
-            # print(str(polarity_map.get(data_annotated[annotated_tweet])) + ' ' + str(message_to_svm_format(tweet_message_clean)))
             svm_file.write(str(polarity_map.get(data_annotated[annotated_tweet])) + ' ' + str(message_to_svm_format(tweet_message_clean)) + '\n')
 
 
-def tweets_test_to_svm_format():
+def test_corpus_to_svm_format():
     data = []
     with open(test_corpus_filename, 'r', encoding="utf-8") as f:
         for line in f:
@@ -121,11 +120,10 @@ def tweets_test_to_svm_format():
         for tweet_message in data:
             # Cleaning message
             tweet_message_clean = clean_message(tweet_message)
-            # print(str(polarity_map.get(data_annotated[annotated_tweet])) + ' ' + str(message_to_svm_format(tweet_message_clean)))
             svm_file.write('1 ' + str(message_to_svm_format(tweet_message_clean)) + '\n')
 
 
-def out_svm_to_evaluation_platform_format(test_out_filename):
+def svm_output_to_evaluation_platform_format(test_out_filename):
     data_ids = []
 
     with open(test_corpus_filename, 'r', encoding="utf-8") as f:
@@ -147,12 +145,18 @@ def out_svm_to_evaluation_platform_format(test_out_filename):
 
 if __name__ == '__main__':
 
-    # add_learning_corpus_to_lexique()
-    print("Entering 2nd method")
-    # add_test_corpus_to_lexique()
+    # Create lexicon
+    add_learning_corpus_to_lexique()
+    add_test_corpus_to_lexique()
+
+    # Format learning corpus (very long to execute)
     # tweets_learning_to_svm_format()
+
+    # Format test corpus
     # tweets_test_to_svm_format()
-    out_svm_to_evaluation_platform_format('../common/data/metrics/svm/out_svm.txt')
+
+    # Format svm output to use file on evaluation platform
+    # svm_output_to_evaluation_platform_format('../common/data/metrics/svm/out_svm.txt')
 
 
 # Train model: liblinear-2.30/train -c 4 -e 0.1 common/data/annotated/apprentissage_svm.svm python/models/svm/tweets.model
