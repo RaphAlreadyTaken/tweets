@@ -109,8 +109,20 @@ def get_all_unique_tweets():
 
 
 def remove_punctuation(message):
+    # Removing chars
     retour = message.replace(',', ' ')
     retour = retour.replace(':', ' ')
+    retour = retour.replace('(', ' ')
+    retour = retour.replace(')', ' ')
+    retour = retour.replace('[', ' ')
+    retour = retour.replace(']', ' ')
+    retour = retour.replace(';', ' ')
+    retour = retour.replace('+', ' ')
+    retour = retour.replace('/', ' ')
+    retour = retour.replace('=', ' ')
+
+
+    # Surround chars with blank spaces
     retour = retour.replace('.', ' . ')
     # retour = retour.replace('"', ' " ')
     retour = retour.replace('?', ' ? ')
