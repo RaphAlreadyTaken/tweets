@@ -113,6 +113,9 @@ def remove_punctuation(message):
     retour = retour.replace(':', ' ')
     retour = retour.replace('.', ' . ')
     retour = retour.replace('"', ' " ')
+    retour = retour.replace('?', ' ? ')
+    retour = retour.replace('!', ' ! ')
+
     return retour
 
 
