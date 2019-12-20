@@ -1,6 +1,5 @@
 import json
 import time
-from math import floor
 
 import numpy as np
 from keras import Sequential

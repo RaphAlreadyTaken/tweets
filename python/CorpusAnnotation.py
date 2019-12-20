@@ -169,6 +169,7 @@ for tweet in data:
                 cpt_mixte += 1
             # Modifications dans un sens + valeur absolue du score supérieure au seuil de prise en compte
             else:
+            # elif len(pos_mod) == 0 or len(neg_mod) == 0:
                 if abs(score_message) >= seuil_mots:
                     tweet_polarity = util.get_polarity_from_score(score_message)
                     is_annotated = True
