@@ -33,7 +33,7 @@ def configure_model(input_size, output_size):
 
     local_model.add(Dense(output_size, activation="softmax"))
 
-    local_model.compile(loss="categorical_crossentropy", optimizer="Adadelta",
+    local_model.compile(loss="categorical_crossentropy", optimizer="Adam",
                         metrics=["categorical_accuracy"])
 
     return local_model
@@ -84,5 +84,5 @@ if __name__ == '__main__':
     # Callback EarlyStopping
     earlystop = EarlyStopping(monitor="val_categorical_accuracy", mode="max", verbose=1, patience=200)
 
-    model.fit(np.array(training_data), np.array(training_output), epochs=1000, verbose=1, shuffle=True,
+    model.fit(np.array(training_data), np.array(training_output), epochs=2000, verbose=1, shuffle=True,
               validation_split=0.2, callbacks=[checkpoint, earlystop])
