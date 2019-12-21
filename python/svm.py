@@ -1,4 +1,7 @@
 import json
+
+import spacy
+
 import util
 
 lexique_filename = '../common/data/raw/lexique_svm.json'
@@ -9,12 +12,14 @@ polarity_map = {"negatif": 0, "positif": 1, "mixte": 2, "neutre": 3}
 
 polarity_map_output = {0: "negatif", 1: "positif", 2: "mixte", 3: "autre"}
 
+lemmatizer = spacy.load("fr_core_news_md")
+
 
 def clean_message(message):
     message_clean = util.clean_message_light(message)
     message_clean_splitted = message_clean.split()
     message_clean_splitted = util.remove_elisions(message_clean_splitted)
-    message_clean = util.lemmatize(message_clean_splitted)
+    message_clean = util.lemmatize(message_clean_splitted, lemmatizer)
 
     return message_clean
 
@@ -104,8 +109,9 @@ def tweets_learning_to_svm_format():
             tweet_message = tweet['_source']['message']
             # Cleaning message
             tweet_message_clean = clean_message(tweet_message)
+            print(tweet_message_clean)
             # to get progress
-            print(annotated_tweet)
+            # print(annotated_tweet)
             svm_file.write(str(polarity_map.get(data_annotated[annotated_tweet])) + ' ' + str(message_to_svm_format(tweet_message_clean)) + '\n')
 
 
@@ -146,14 +152,14 @@ def svm_output_to_evaluation_platform_format(test_out_filename):
 if __name__ == '__main__':
 
     # Create lexicon
-    add_learning_corpus_to_lexique()
-    add_test_corpus_to_lexique()
+    # add_learning_corpus_to_lexique()
+    # add_test_corpus_to_lexique()
 
     # Format learning corpus (very long to execute)
-    # tweets_learning_to_svm_format()
+    tweets_learning_to_svm_format()
 
     # Format test corpus
-    # tweets_test_to_svm_format()
+    # test_corpus_to_svm_format()
 
     # Format svm output to use file on evaluation platform
     # svm_output_to_evaluation_platform_format('../common/data/metrics/svm/out_svm.txt')

@@ -1,6 +1,8 @@
 import json
 import re
 
+import spacy
+
 import util
 
 # Writing emojis polarity to file
@@ -11,7 +13,7 @@ with open('../common/data/annotated/emojis.json', 'w') as file:
 with open('../common/data/annotated/hashtags.json', 'r') as file:
     dict_hashtags = json.load(file)
 
-with open('../common/data/annotated/words.json', 'r') as file:
+with open('../common/data/annotated/words_lemmatized.json', 'r', encoding="utf-8") as file:
     dict_words = json.load(file)
 
 with open('../common/data/annotated/emojis.json', 'r') as file:
@@ -50,9 +52,12 @@ emojis_flag = True
 quotes_flag = True
 words_flag = True
 
-seuil_mots = 3
+seuil_mots = 4
+
+lemmatizer = spacy.load("fr_core_news_md")
 
 for tweet in data:
+    print("Annotating tweet {}".format(tweet["_id"]))
     tweet_polarity = ""
 
     ########### Message ###########
@@ -68,6 +73,8 @@ for tweet in data:
     message_clean_splitted = util.remove_elisions(message_clean_splitted)
 
     is_annotated = False
+
+    # TODO: caps
 
     ########### Quotes ###########
     if is_annotated is False:
@@ -94,8 +101,6 @@ for tweet in data:
 
     ########### Hashtags ###########
     if is_annotated is False:
-        message_clean = util.lemmatize(message_clean_splitted)
-
         if hand_annotated_hashtags_lists_flag is True:
             score_hashtag = 0
             hashtags = tweet['_source']['hashtags']
@@ -140,6 +145,8 @@ for tweet in data:
     ########### Mots ###########
     if is_annotated is False:
         if words_flag is True:
+            message_clean = message_clean_splitted
+            message_clean = util.lemmatize(message_clean, lemmatizer)
             score_message = 0  # Score global du message
             pos_mod = []  # Indicateur de modification positive du message
             neg_mod = []  # Indicateur de modification négative du message
@@ -147,7 +154,8 @@ for tweet in data:
             # Pour chaque mot du tweet
             for mot in message_clean:
                 # On trouve le mot dans le dictionnaire FEEL
-                if dict_words.get(mot) is not None:
+                if dict_words.get(mot):
+                    print("word found: {}".format(mot))
                     new_score_message = score_message + int(dict_correspondances.get(dict_words.get(mot)))
 
                     # Si le nouveau score est plus élevé que l'ancien
@@ -155,7 +163,7 @@ for tweet in data:
                         pos_mod.append(True)
                     # Si le nouveau score est moins élevé que l'ancien
                     else:
-                        neg_mod.append(False)
+                        neg_mod.append(True)
 
                     # Assignation de valeur pour itération suivante
                     score_message = new_score_message
@@ -182,7 +190,15 @@ for tweet in data:
 
     if is_annotated is True:
         tweets_polarity[tweet['_id']] = tweet_polarity
-    # TODO : Condition du désespoir pour faire monter les perfs, à supprimer (annote tout le corpus non annoté précédemment en neutre)
+
+        if tweet_polarity == "negatif":
+            cpt_negative += 1
+        elif tweet_polarity == "positif":
+            cpt_positive += 1
+        else:
+            cpt_neutre += 1
+
+    # Condition du désespoir pour faire monter les perfs (annote tout le corpus non annoté en neutre)
     else:
         tweets_polarity[tweet['_id']] = "neutre"
         cpt_neutre += 1

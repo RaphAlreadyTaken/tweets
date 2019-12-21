@@ -18,7 +18,7 @@ def evaluate_all_models():
     # Evaluate all models
     for file in os.listdir(local_model_dir):
         file_path = os.path.join(local_model_dir, file)
-        output_file = "../common/data/metrics/result_{}.txt".format(file)
+        output_file = "../common/data/metrics/keras/result_{}.txt".format(file)
 
         # Chargement des modèles
         if os.path.isfile(file_path):

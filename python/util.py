@@ -4,22 +4,18 @@ import json
 import re
 
 import demoji
-import nltk
 import pandas as pd
+import spacy as spacy
 from elasticsearch import Elasticsearch, exceptions
-from nltk import SnowballStemmer
 
 from CorpusVectorization import infer_vector
 
 demoji.download_codes()
-nltk.download("stopwords")
-
 
 # Regex for emoticons: http://sentiment.christopherpotts.net/tokenizing.html
 # Code original (avant modifs): https://kb.objectrocket.com/elasticsearch/how-to-use-python-to-make-scroll-queries-to-get-all-documents-in-an-elasticsearch-index-752
 
 
-# TODO : écrire sur disque (long à relancer à chaque fois)
 def get_all_tweets():
     # declare globals for the Elasticsearch client host
     DOMAIN = "localhost"
@@ -108,6 +104,47 @@ def get_all_unique_tweets():
     return tweets
 
 
+def process_lexicon(lemm=True):
+    print("Loading lemmatizer...")
+    lemmatizer = spacy.load("fr_core_news_md")
+    print("Lemmatizer loaded\n")
+    formatted_words = {}
+
+    print("Processing lexicon...")
+    with open("../common/data/external/FEEL.csv", "r", encoding="utf-8") as file:
+        csv_reader = csv.reader(file, delimiter=";")
+        next(csv_reader)    # Ignore first line (headers)
+
+        for row in csv_reader:
+            word = row[1]
+            words = []
+
+            # Si mot unique
+            if word.find(" ") == -1:
+                word = word.lower()
+                # Si entrée polymorphique
+                if word.find("|") != -1:
+                    # Split des mots
+                    word_list = word.split("|")
+                    for w in word_list:
+                        words.append(w)
+                else:
+                    words.append(word)
+
+                # Ajout au dictionnaire de mots
+                for wo in words:
+                    if lemm:
+                        wo = lemmatize(wo, lemmatizer)
+
+                    formatted_words[str(wo[0])] = row[2]
+    print("Lexicon processed\n")
+
+    print("Writing lexicon to file...")
+    with open("../common/data/annotated/words_lemmatized.json", "w", encoding="utf-8") as file:
+        json.dump(formatted_words, file, sort_keys=True, indent=4)
+    print("Lexicon written\n")
+
+
 def remove_punctuation(message):
     # Removing chars
     retour = message.replace(',', ' ')
@@ -120,11 +157,11 @@ def remove_punctuation(message):
     retour = retour.replace('+', ' ')
     retour = retour.replace('/', ' ')
     retour = retour.replace('=', ' ')
+    retour = retour.replace('"', ' ')
 
 
     # Surround chars with blank spaces
     retour = retour.replace('.', ' . ')
-    # retour = retour.replace('"', ' " ')
     retour = retour.replace('?', ' ? ')
     retour = retour.replace('!', ' ! ')
 
@@ -145,7 +182,7 @@ def remove_url(message):
 
 def remove_elisions(message):
     """Suppression des élisions
-    ex: l'arbre, c'était, t'as, ... deviennent arbre, était, as, ... (voir si on peut faire plus propre)
+    ex: l'arbre, c'était, t'as, ... deviennent arbre, était, as, ...
     """
     for i, s in enumerate(message):
         match = re.search(".'([^\\s]*)", s)
@@ -156,13 +193,21 @@ def remove_elisions(message):
     return message
 
 
-def lemmatize(message):
+def lemmatize(message, lemmatizer):
     """Lemmatisation
-    Le dictionnaire de correspondances doit être également lemmatisé avec Snowball
-    (adaptation de Porter Stemmer en français)
-    """
-    stemmer = SnowballStemmer("french", ignore_stopwords=True)
-    return [stemmer.stem(x) for x in message]
+        Pour utiliser Spacy :
+            pip3 install spacy
+            python -m spacy download fr_core_news_md
+        """
+    # Le message passé est une liste de strings
+    if isinstance(message, list):
+        str_message = " ".join(message)
+        result = lemmatizer(str_message)
+    # Le message passé est une phrase
+    else:
+        result = lemmatizer(message)
+
+    return [x.lemma_ for x in result]
 
 
 def clean_message(message):
@@ -208,9 +253,9 @@ def clean_message_light(message):
     return retour
 
 
-def format_message_split(message):
+def format_message_split(message, lemmatizer):
     retour = remove_elisions(message)
-    retour = lemmatize(retour)
+    retour = lemmatize(retour, lemmatizer)
     return retour
 
 
@@ -404,5 +449,4 @@ def get_word_frequencies():
 
     frequencies = sorted(frequencies.items(), key=lambda x: x[1], reverse=True)
 
-    # Fucking fuck encoding
     print(frequencies)

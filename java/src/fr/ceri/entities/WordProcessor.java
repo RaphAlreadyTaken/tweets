@@ -22,7 +22,7 @@ public class WordProcessor
     {
         wordList = new HashMap<>();
         inputFile = "../common/data/external/FEEL.csv";
-        targetDataFile = "../common/data/annotated/words.json";
+        targetDataFile = "../common/data/annotated/words_full.json";
     }
 
     public Map<String, String> getWordList()
@@ -59,11 +59,13 @@ public class WordProcessor
                     word = words.get(0).length() < words.get(1).length() ? words.get(0) : words.get(1);
                 }
 
-                // Stemming
-                SnowballStemmer stemmer = new frenchStemmer();
-                stemmer.setCurrent(word);
-                stemmer.stem();
-                wordList.put(stemmer.getCurrent(), record.get(2));
+                // Stemming (commenté pour version sans stemming)
+                // SnowballStemmer stemmer = new frenchStemmer();
+                // stemmer.setCurrent(word);
+                // stemmer.stem();
+                // wordList.put(stemmer.getCurrent(), record.get(2));
+
+                wordList.put(word, record.get(2));
             }
         }
     }

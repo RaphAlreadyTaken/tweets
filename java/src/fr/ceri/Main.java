@@ -1,9 +1,6 @@
 package fr.ceri;
 
-import fr.ceri.entities.ElasticQuery;
-import fr.ceri.entities.HashtagProcessor;
-import fr.ceri.entities.LexiqueCreator;
-import fr.ceri.entities.WriterToFS;
+import fr.ceri.entities.*;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.search.SearchHit;
 import org.json.JSONObject;
@@ -19,21 +16,21 @@ public class Main
     {
         WriterToFS writerToFS = new WriterToFS();
 
-       String field = "hashtags";
+//       String field = "hashtags";
+//
+//       ElasticQuery query = new ElasticQuery("localhost", 9200, "http");
+//       SearchRequest request = query.buildElasticQuery(new String[]{field}, null);
+//       List<SearchHit> hits = query.sendElasticQuery(request);
+//
+//       HashtagProcessor hashProc = new HashtagProcessor();
+//
+//       hashProc.convertToHashtagMap(hits, field);
+//       hashProc.displayHashtagMap();
+//       writerToFS.writeToFS(hashProc.getHashMap(), hashProc.getTargetDataFile());
 
-       ElasticQuery query = new ElasticQuery("localhost", 9200, "http");
-       SearchRequest request = query.buildElasticQuery(new String[]{field}, null);
-       List<SearchHit> hits = query.sendElasticQuery(request);
-
-       HashtagProcessor hashProc = new HashtagProcessor();
-
-       hashProc.convertToHashtagMap(hits, field);
-       hashProc.displayHashtagMap();
-       writerToFS.writeToFS(hashProc.getHashMap(), hashProc.getTargetDataFile());
-
-//         WordProcessor wordProc = new WordProcessor();
-//         wordProc.convertToWordMapAndFormat();
-//         writerToFS.writeToFS(wordProc.getWordList(), wordProc.getTargetDataFile());
+         WordProcessor wordProc = new WordProcessor();
+         wordProc.convertToWordMapAndFormat();
+         writerToFS.writeToFS(wordProc.getWordList(), wordProc.getTargetDataFile());
 
         //TRUC SVM
 //        try
