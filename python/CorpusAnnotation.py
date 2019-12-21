@@ -11,11 +11,16 @@ with open('../common/data/annotated/emojis.json', 'w') as file:
 with open('../common/data/annotated/hashtags.json', 'r') as file:
     dict_hashtags = json.load(file)
 
+# FEEL
 with open('../common/data/annotated/words.json', 'r') as file:
     dict_words = json.load(file)
 
+# "Like it"
+# dict_words = util.load_word_classification_ilikeit('../common/data/external/06032019-POLARITY-JEUXDEMOTS-FR.csv')
+
 with open('../common/data/annotated/emojis.json', 'r') as file:
     dict_emojis = json.load(file)
+
 
 heavy_negatives_list = util.load_list_from_file('../common/data/annotated/heavy_negatives.txt')
 mildly_heavy_negatives_list = util.load_list_from_file('../common/data/annotated/midly_heavy_negatives.txt')

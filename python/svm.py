@@ -91,7 +91,7 @@ def message_to_svm_format(message):
     return return_str
 
 
-def tweets_learning_to_svm_format():
+def learning_corpus_to_svm_format():
     data_full = util.get_all_tweets()
     with open('../common/data/annotated/apprentissage.json', 'r') as file:
         data_annotated = json.load(file)
@@ -146,17 +146,17 @@ def svm_output_to_evaluation_platform_format(test_out_filename):
 if __name__ == '__main__':
 
     # Create lexicon
-    add_learning_corpus_to_lexique()
-    add_test_corpus_to_lexique()
+    # add_learning_corpus_to_lexique()
+    # add_test_corpus_to_lexique()
 
     # Format learning corpus (very long to execute)
-    # tweets_learning_to_svm_format()
+    # learning_corpus_to_svm_format()
 
     # Format test corpus
-    # tweets_test_to_svm_format()
+    # test_corpus_to_svm_format()
 
     # Format svm output to use file on evaluation platform
-    # svm_output_to_evaluation_platform_format('../common/data/metrics/svm/out_svm.txt')
+    svm_output_to_evaluation_platform_format('../common/data/metrics/svm/out_svm.txt')
 
 
 # Train model: liblinear-2.30/train -c 4 -e 0.1 common/data/annotated/apprentissage_svm.svm python/models/svm/tweets.model

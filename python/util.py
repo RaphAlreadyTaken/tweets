@@ -376,6 +376,27 @@ def load_emoji_classification(filepath):
     return retour
 
 
+def load_word_classification_ilikeit(filepath):
+    retour = {}
+    # 2 3 4
+    # // colonnes : numéro de ligne ; terme ; # positif ; # neutre ; # négatif
+    with open(filepath, 'r', encoding="utf8") as file:
+        for line in file:
+            line_split = line.split(';')
+            if len(line_split) == 5:
+                current_word = line_split[1].replace('"', '')
+                if int(line_split[2]) > int(line_split[3]):
+                    retour[current_word] = "positif"
+                    max_value = int(line_split[2])
+                else:
+                    retour[current_word] = "neutre"
+                    max_value = int(line_split[3])
+                if max_value < int(line_split[4]):
+                    retour[current_word] = "negatif"
+
+    return retour
+
+
 def load_list_from_file(filename):
     return_list = [line.rstrip('\n') for line in open(filename)]
     return return_list
