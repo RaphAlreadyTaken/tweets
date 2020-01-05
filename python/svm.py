@@ -1,6 +1,7 @@
 import json
 
 import spacy
+from spacy.lang.fr import French
 
 import util
 
@@ -40,12 +41,10 @@ def load_lexique_from_file():
 
 
 def add_learning_corpus_to_lexique():
-    data = util.get_all_tweets()
+    tweets = util.get_all_tweets()
 
-    lexique_dict = load_lexique_from_file()
-    lexique_size = 1
-    if len(lexique_dict) > 0:
-        lexique_size = len(lexique_dict)
+    # Filtrage des tweets inutiles
+    filtered_tweets = util.get_filtered_tweets(tweets)
 
     cpt = 0
     for tweet in data:
@@ -55,7 +54,7 @@ def add_learning_corpus_to_lexique():
         # Cleaning message
         message_clean = clean_message(message)
 
-        for word in message_clean:
+        for word in message:
             if lexique_dict.get(word) is None:
                 lexique_dict[word] = lexique_size
                 lexique_size += 1
@@ -79,7 +78,7 @@ def add_test_corpus_to_lexique():
 
     for tweet in data:
         # Cleaning message
-        message_clean = clean_message(tweet)
+        message_clean = util.clean_message(tweet, lemmatizer, nlp)
 
         for word in message_clean:
             if lexique_dict.get(word) is None:
@@ -147,7 +146,7 @@ def test_corpus_to_svm_format():
     with open('../common/data/raw/test_svm.svm', 'w') as svm_file:
         for tweet_message in data:
             # Cleaning message
-            tweet_message_clean = clean_message(tweet_message)
+            tweet_message_clean = util.clean_message(tweet_message, lemmatizer, nlp)
             svm_file.write('1 ' + str(message_to_svm_format(tweet_message_clean)) + '\n')
 
 
@@ -184,7 +183,7 @@ if __name__ == '__main__':
     # test_corpus_to_svm_format()
 
     # Format svm output to use file on evaluation platform
-    svm_output_to_evaluation_platform_format('../common/data/metrics/svm/out_svm.txt')
+    # svm_output_to_evaluation_platform_format('../common/data/metrics/svm/out_svm.txt')
 
 
 # Train model: liblinear-2.30/train -c 4 -e 0.1 common/data/annotated/apprentissage_svm.svm python/models/svm/tweets.model

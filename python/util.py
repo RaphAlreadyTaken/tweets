@@ -7,14 +7,15 @@ import demoji
 import pandas as pd
 import spacy as spacy
 from elasticsearch import Elasticsearch, exceptions
+from spacy.lang.fr import French
 
-from CorpusVectorization import infer_vector
+import CorpusVectorization
 
 demoji.download_codes()
 
+
 # Regex for emoticons: http://sentiment.christopherpotts.net/tokenizing.html
 # Code original (avant modifs): https://kb.objectrocket.com/elasticsearch/how-to-use-python-to-make-scroll-queries-to-get-all-documents-in-an-elasticsearch-index-752
-
 
 def get_all_tweets():
     # declare globals for the Elasticsearch client host
@@ -113,7 +114,7 @@ def process_lexicon(lemm=True):
     print("Processing lexicon...")
     with open("../common/data/external/FEEL.csv", "r", encoding="utf-8") as file:
         csv_reader = csv.reader(file, delimiter=";")
-        next(csv_reader)    # Ignore first line (headers)
+        next(csv_reader)  # Ignore first line (headers)
 
         for row in csv_reader:
             word = row[1]
@@ -159,7 +160,6 @@ def remove_punctuation(message):
     retour = retour.replace('=', ' ')
     retour = retour.replace('"', ' ')
 
-
     # Surround chars with blank spaces
     retour = retour.replace('.', ' . ')
     retour = retour.replace('?', ' ? ')
@@ -193,7 +193,7 @@ def remove_elisions(message):
     return message
 
 
-def lemmatize(message, lemmatizer):
+def lemmatize(message, lemmatizer, nlp):
     """Lemmatisation
         Pour utiliser Spacy :
             pip3 install spacy
@@ -207,21 +207,7 @@ def lemmatize(message, lemmatizer):
     else:
         result = lemmatizer(message)
 
-    return [x.lemma_ for x in result]
-
-
-def clean_message(message):
-    retour = remove_hashtag(message)
-    retour = remove_username(retour)
-    retour = remove_url(retour)
-    retour = remove_punctuation(retour)
-
-    retour = re.sub(' +', ' ', retour)  # enlever les multiples espaces
-    retour = retour.strip()  # enlever les trailing spaces
-
-    retour = retour.lower()  # tout minuscule
-
-    return retour
+    return [x.lemma_ for x in result if not nlp.vocab[x.lemma_].is_stop]
 
 
 def clean_message_keep_quotes(message):
@@ -259,11 +245,21 @@ def format_message_split(message, lemmatizer):
     return retour
 
 
-def clean_full(message):
-    retour = clean_message(message)
-    retour_split = retour.split()
-    retour_split = format_message_split(retour_split)
-    return retour_split
+def clean_message(message, lemmatizer, nlp):
+    message = remove_hashtag(message)
+    message = remove_username(message)
+    message = remove_url(message)
+    message = remove_punctuation(message)
+
+    message = re.sub(' +', ' ', message)  # enlever les multiples espaces
+    message = message.strip()  # enlever les trailing spaces
+
+    message = message.lower()  # tout minuscule
+
+    message = message.split()
+    message = remove_elisions(message)
+    message = lemmatize(message, lemmatizer, nlp)
+    return message
 
 
 def clean_light(message):
@@ -274,69 +270,72 @@ def clean_light(message):
 
 
 def get_messages_as_dict(tweets):
+    lemmatizer = spacy.load("fr_core_news_md")
+    nlp = French()
     messages = {}
 
     for i, s in enumerate(tweets):
-        tweet_id, tweet_text = get_message_as_dict(s)
-        messages[tweet_id] = tweet_text
+        get_message_as_dict(s, lemmatizer, nlp)
 
     return messages
 
 
-def get_messages_full_as_dict(tweets):
+def get_message_as_dict(tweet, lemmatizer, nlp):
+    tweet_id = tweet['_id']
+    tweet_text = clean_message(tweet['_source']['message'], lemmatizer, nlp)
+    return tweet_id, tweet_text
+
+
+def get_filtered_tweets(unfiltered_tweets):
+    lemmatizer = spacy.load("fr_core_news_md")
+    nlp = French()
+    lexicon = load_extended_lexicon()
     messages = {}
 
-    for i, s in enumerate(tweets):
-        tweet_id, tweet_text = get_message_full_as_dict(s)
-        messages[tweet_id] = tweet_text
+    for i, s in enumerate(unfiltered_tweets):
+        tweet_id = s['_id']
+        tweet_text = clean_message(s['_source']['message'], lemmatizer, nlp)
+
+        for text in tweet_text:
+            if text in lexicon:
+                messages[tweet_id] = tweet_text
 
     return messages
 
 
-def get_message_as_dict(tweet):
+def save_filtered_tweets(filtered_tweets):
+    with open("../common/data/processed/unlabeled_filtered.json", "w", encoding="utf-8") as file:
+        file.write(json.dumps({int(x): filtered_tweets[x] for x in filtered_tweets.keys()}, indent=4, sort_keys=True))
+        # json.dump(filtered_tweets, file, sort_keys=True, indent=4)
+
+
+def get_message_test_as_dict(tweet, lemmatizer, nlp):
     tweet_id = tweet['_id']
-    tweet_text = clean_full(tweet['_source']['message'])
+    tweet_text = clean_message(tweet['message'], lemmatizer, nlp)
     return tweet_id, tweet_text
 
 
-def get_message_test_as_dict(tweet):
-    tweet_id = tweet['_id']
-    tweet_text = clean_full(tweet['message'])
-    return tweet_id, tweet_text
-
-
-def get_message_full_as_dict(tweet):
-    tweet_id = tweet['_id']
-    tweet_text = clean_light(tweet['_source']['message'])
-    return tweet_id, tweet_text
-
-
-def get_message_test_full_as_dict(tweet):
-    tweet_id = tweet['_id']
-    tweet_text = clean_light(tweet['message'])
-    return tweet_id, tweet_text
-
-
-def prepare_learning_data(tweets):
+def prepare_learning_data(tweets, model, version):
     formatted_input_data = []
+    i = 0
 
-    for tweet in tweets:
-        print("Preparing tweet {}".format(tweet["_id"]))
+    for tweet_key in tweets.keys():
+        print("Preparing tweet {}".format(tweet_key))
 
-        tweet_data = {"id": tweet["_id"]}
-
-        _, tweet_text = get_message_as_dict(tweet)
-        tweet_vectorized = infer_vector(tweet_text)
-        tweet_data["message"] = pd.Series(tweet_vectorized).to_json(orient='values')
+        tweet_data = {"id": tweet_key, "message": model.docvecs[i].tolist()}
         formatted_input_data.append(tweet_data)
 
-    with open('../common/data/trained/vectors.json', 'w', encoding="utf-8") as file:
-        json.dump(formatted_input_data, file)
+        i += 1
+
+    with open("../common/data/trained/vectors_v{}.json".format(version), "w", encoding="utf-8") as file:
+        json.dump(formatted_input_data, file, indent=4, sort_keys=True)
 
     return formatted_input_data
 
 
-def prepare_learning_data_full(tweets):
+def prepare_test_data(tweets):
+    lemmatizer = spacy.load("fr_core_news_md")
+    nlp = French()
     formatted_input_data = []
 
     for tweet in tweets:
@@ -344,27 +343,8 @@ def prepare_learning_data_full(tweets):
 
         tweet_data = {"id": tweet["_id"]}
 
-        _, tweet_text = get_message_full_as_dict(tweet)
-        tweet_vectorized = infer_vector(tweet_text)
-        tweet_data["message"] = ast.literal_eval(pd.Series(tweet_vectorized).to_json(orient='values'))
-        formatted_input_data.append(tweet_data)
-
-    with open('../common/data/trained/vectors.json', 'w', encoding="utf-8") as file:
-        json.dump(formatted_input_data, file)
-
-    return formatted_input_data
-
-
-def prepare_test_data_full(tweets):
-    formatted_input_data = []
-
-    for tweet in tweets:
-        print("Preparing tweet {}".format(tweet["_id"]))
-
-        tweet_data = {"id": tweet["_id"]}
-
-        _, tweet_text = get_message_test_full_as_dict(tweet)
-        tweet_vectorized = infer_vector(tweet_text)
+        _, tweet_text = get_message_test_as_dict(tweet, lemmatizer, nlp)
+        tweet_vectorized = CorpusVectorization.infer_vector(tweet_text)
         tweet_data["message"] = ast.literal_eval(pd.Series(tweet_vectorized).to_json(orient='values'))
         formatted_input_data.append(tweet_data)
 
@@ -442,8 +422,30 @@ def load_word_classification_ilikeit(filepath):
     return retour
 
 
+def load_extended_lexicon():
+    nlp = French()
+
+    with open("../common/data/external/Lexique383.csv", "r", encoding="utf-8") as file:
+        csv_reader = csv.reader(file, delimiter=";")
+        next(csv_reader)  # Ignore first line (headers)
+
+        words = {}
+
+        for row in csv_reader:
+            # Si mot unique
+            if row[2].find(" ") == -1:
+                lexeme = nlp.vocab[row[2]]
+                # On ignore les mots vides
+                if not lexeme.is_stop:
+                    words[row[2]] = None
+
+    print(" Lemmas found: ", len(words))
+
+    return words
+
+
 def load_list_from_file(filename):
-    return_list = [line.rstrip('\n') for line in open(filename)]
+    return_list = [line.rstrip('\n') for line in open(filename, encoding="utf-8")]
     return return_list
 
 
@@ -471,3 +473,33 @@ def get_word_frequencies():
     frequencies = sorted(frequencies.items(), key=lambda x: x[1], reverse=True)
 
     print(frequencies)
+
+
+def filter_negative_words(file):
+    lemmatizer = spacy.load("fr_core_news_md")
+    nlp = French()
+    negatives_list = load_list_from_file(file)
+    normalized_negative_list = []
+    ignore_list = ["!", "?", " "]
+
+    for message in negatives_list:
+        lemmatized = False
+        if not any(x in message for x in ignore_list):
+            message = lemmatize(message, lemmatizer, nlp)
+            lemmatized = True
+
+        if lemmatized:
+            if len(message) > 0 and message[0] not in normalized_negative_list:
+                normalized_negative_list.append(message[0])
+        else:
+            if message not in normalized_negative_list:
+                normalized_negative_list.append(message)
+
+    with open('{}_filtered.txt'.format(file), 'a+', encoding="utf-8") as file:
+        for mot in normalized_negative_list:
+            file.write(mot + "\n")
+
+
+# Main pour effectuer certains traitements
+if __name__ == '__main__':
+    print("hello")

@@ -1,18 +1,20 @@
 import collections
+import json
 import time
 
+import pandas as pd
 from gensim.models.doc2vec import TaggedDocument, Doc2Vec
 
 import util
 
-latest_model = "models/doc2vec/tweet_vectors_1576546752.5376565.model"
+latest_model = "models/doc2vec/tweet_vectors_1578093577.245187.model"
 
 
 def configure_model(local_documents):
     print("Configuring and building model")
     docs_to_vectorize = [TaggedDocument(words=tweet_text, tags=[tweet_id]) for tweet_id, tweet_text in
                          local_documents.items()]
-    local_model = Doc2Vec(vector_size=100, min_count=2)
+    local_model = Doc2Vec(vector_size=200, min_count=1)
     local_model.build_vocab(docs_to_vectorize)
     print("Model ready")
     return local_model, docs_to_vectorize
@@ -28,7 +30,7 @@ def save_model(local_model):
     print("Saving model")
     target_path = "models/doc2vec/tweet_vectors_{}.model".format(time.time())
     local_model.save(target_path)
-    print("Model saved to {}".format(target_path))
+    print("Model saved to", target_path)
 
 
 def assess_model(local_model, local_documents, taille_eval):
@@ -36,7 +38,7 @@ def assess_model(local_model, local_documents, taille_eval):
     https://radimrehurek.com/gensim/auto_examples/tutorials/run_doc2vec_lee.html#sphx-glr-auto-examples-tutorials-run-doc2vec-lee-py
     """
     if taille_eval > 1000:
-        print("Warning: assessing large models can take a long time")
+        print("Warning: assessing models with a large number of vectors can take a long time")
 
     print("Assessing model")
 
@@ -76,18 +78,27 @@ def infer_vector(tweet_message):
 
 if __name__ == '__main__':
     tweets = util.get_all_tweets()
-    tweet_messages = util.get_messages_full_as_dict(tweets)
 
-    # model, documents = configure_model(tweet_messages)
-    # train_model(model, documents, 100)
-    # save_model(model)
+    # Filtrage des tweets inutiles
+    filtered_tweets = util.get_filtered_tweets(tweets)
+    print(len(filtered_tweets))
 
-    model = get_model(latest_model)
-    vectors = get_vectors_from_model(model)
+    util.save_filtered_tweets(filtered_tweets)
 
+    with open("../common/data/processed/unlabeled_filtered.json", "r", encoding="utf-8") as file:
+        loaded_filtered_tweets = json.load(file)
+
+    model, documents = configure_model(loaded_filtered_tweets)
+    train_model(model, documents, 100)
+    save_model(model)
+
+    # model = get_model(latest_model)
+    # print(assess_model(model, loaded_filtered_tweets, 1000))
+
+    # print(model.most_similar(positive=["macron"]))
+
+    # vectors = get_vectors_from_model(model)
     # for vector in vectors:
     #     pprint(vector)
 
-    assess_model(model, tweet_messages, 1000)
 
-    # TODO: test sur nouveau tweet (comparaison visuelle avec most_similar). Penser à normaliser avant.

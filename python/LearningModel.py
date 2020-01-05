@@ -8,6 +8,7 @@ from keras.layers import Dense
 from keras.utils import to_categorical
 
 import util
+from CorpusVectorization import get_model, latest_model
 
 model_dir = "models\\keras"
 
@@ -25,10 +26,10 @@ def configure_model(input_size, output_size):
     """
 
     local_model = Sequential()
-    local_model.add(Dense(100, input_dim=input_size, activation="relu"))
+    local_model.add(Dense(200, input_dim=input_size, activation="relu"))
 
     for j in range(7):
-        local_model.add(Dense(100, activation="relu"))
+        local_model.add(Dense(200, activation="relu"))
 
     local_model.add(Dense(output_size, activation="softmax"))
 
@@ -50,14 +51,18 @@ def dispatch_data(dataset, outputset):
     return local_training_data, local_training_output
 
 
-if __name__ == '__main__':
-    with open("../common/data/annotated/apprentissage.json", 'r') as f:
+if __name__ == "__main__":
+    with open("../common/data/annotated/apprentissage.json", "r", encoding="utf-8") as f:
         polarites = json.load(f)
 
-    # WARNING: très long, à ne faire qu'une fois (résultat dans common/trained/vectors_xx.json)
-    # data = util.prepare_learning_data_full(tweets)
+    with open("../common/data/processed/unlabeled_filtered.json", "r", encoding="utf-8") as file:
+        loaded_filtered_tweets = json.load(file)
 
-    with open("../common/data/trained/vectors_v2.json", 'r') as f:
+    d2v_model = get_model(latest_model)
+
+    data = util.prepare_learning_data(loaded_filtered_tweets, d2v_model, 3)
+
+    with open("../common/data/trained/vectors_v3.json", "r") as f:
         data = json.load(f)
 
     actual_tweet_ids = [x for x in polarites.keys()]
@@ -67,7 +72,7 @@ if __name__ == '__main__':
 
     training_data, training_output = dispatch_data(data, polarites)
 
-    model = configure_model(len(training_data[0]), len(output_map))
+    keras_model = configure_model(len(training_data[0]), len(output_map))
 
     model_training_time = time.time()
 
@@ -83,5 +88,5 @@ if __name__ == '__main__':
     # Callback EarlyStopping
     earlystop = EarlyStopping(monitor="val_categorical_accuracy", mode="max", verbose=1, patience=200)
 
-    model.fit(np.array(training_data), np.array(training_output), epochs=2000, verbose=1, shuffle=True,
-              validation_split=0.2, callbacks=[checkpoint, earlystop])
+    keras_model.fit(np.array(training_data), np.array(training_output), epochs=2000, verbose=1, shuffle=True,
+                    validation_split=0.2, callbacks=[checkpoint, earlystop])
