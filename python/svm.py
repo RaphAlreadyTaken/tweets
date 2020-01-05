@@ -16,10 +16,18 @@ lemmatizer = spacy.load("fr_core_news_md")
 
 
 def clean_message(message):
-    message_clean = util.clean_message_light(message)
+    # message_clean = util.clean_message_light(message)
+    # message_clean_splitted = message_clean.split()
+    # message_clean_splitted = util.remove_elisions(message_clean_splitted)
+    # message_clean = util.lemmatize(message_clean_splitted, lemmatizer)
+
+    message_almost_clean = util.clean_message_keep_quotes(message)
+    message_clean = util.clean_message(message)
+
     message_clean_splitted = message_clean.split()
     message_clean_splitted = util.remove_elisions(message_clean_splitted)
-    message_clean = util.lemmatize(message_clean_splitted, lemmatizer)
+    message_clean = message_clean_splitted
+    message_clean = util.lemmatize(message_clean, lemmatizer)
 
     return message_clean
 
@@ -39,9 +47,11 @@ def add_learning_corpus_to_lexique():
     if len(lexique_dict) > 0:
         lexique_size = len(lexique_dict)
 
+    cpt = 0
     for tweet in data:
         message = tweet['_source']['message']
-
+        cpt += 1
+        print(cpt)
         # Cleaning message
         message_clean = clean_message(message)
 
@@ -88,10 +98,17 @@ def message_to_svm_format(message):
     dict_message = {}
     message_unique_words = set(message) #loop through unique elements
     for word in message_unique_words:
-        dict_message[lexique_dict.get(word)] = message.count(word)
+        if lexique_dict.get(word) is not None:
+            # print("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOPPPPEEEEE : " + str(word))
+            dict_message[lexique_dict.get(word)] = message.count(word)
 
-    for entry in sorted(dict_message):
-        return_str += str(entry) + ':' + str(dict_message[entry]) + ' '
+    # for entry in sorted(dict_message.keys()):
+    #     print(str(entry) + ' : ' + str(type(entry)))
+
+    for entry in sorted(dict_message.keys()):
+        if entry is not None:
+            return_str += str(entry) + ':' + str(dict_message[entry]) + ' '
+        # print(str(entry))
 
     return return_str
 
@@ -101,18 +118,23 @@ def learning_corpus_to_svm_format():
     with open('../common/data/annotated/apprentissage.json', 'r') as file:
         data_annotated = json.load(file)
 
+    cpt = 0
     with open('../common/data/annotated/apprentissage_svm.svm', 'w') as svm_file:
         for annotated_tweet in data_annotated:
+            cpt +=1
+            print(cpt)
             # get full tweet with id of annotated tweet's id
-            tweet = next(x for x in data_full if x['_id'] == annotated_tweet)
-            # get message only
-            tweet_message = tweet['_source']['message']
-            # Cleaning message
-            tweet_message_clean = clean_message(tweet_message)
-            print(tweet_message_clean)
-            # to get progress
-            # print(annotated_tweet)
-            svm_file.write(str(polarity_map.get(data_annotated[annotated_tweet])) + ' ' + str(message_to_svm_format(tweet_message_clean)) + '\n')
+            tweet = next((x for x in data_full if x['_id'] == annotated_tweet), -1)
+
+            if tweet is not -1:
+                # get message only
+                tweet_message = tweet['_source']['message']
+                # Cleaning message
+                tweet_message_clean = clean_message(tweet_message)
+                # print(tweet_message_clean)
+                # to get progress
+                # print(annotated_tweet)
+                svm_file.write(str(polarity_map.get(data_annotated[annotated_tweet])) + ' ' + str(message_to_svm_format(tweet_message_clean)) + '\n')
 
 
 def test_corpus_to_svm_format():
@@ -156,7 +178,7 @@ if __name__ == '__main__':
     # add_test_corpus_to_lexique()
 
     # Format learning corpus (very long to execute)
-    # tweets_learning_to_svm_format()
+    # learning_corpus_to_svm_format()
 
     # Format test corpus
     # test_corpus_to_svm_format()
