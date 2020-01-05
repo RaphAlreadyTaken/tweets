@@ -2,6 +2,7 @@ import json
 import re
 
 import spacy
+from spacy.lang.fr import French
 
 import util
 
@@ -23,8 +24,8 @@ with open('../common/data/annotated/emojis.json', 'r') as file:
     dict_emojis = json.load(file)
 
 
-heavy_negatives_list = util.load_list_from_file('../common/data/annotated/heavy_negatives.txt')
-mildly_heavy_negatives_list = util.load_list_from_file('../common/data/annotated/midly_heavy_negatives.txt')
+heavy_negatives_list = util.load_list_from_file('../common/data/annotated/heavy_negatives_filtered.txt')
+mildly_heavy_negatives_list = util.load_list_from_file('../common/data/annotated/midly_heavy_negatives_filtered.txt')
 dict_date = {}
 
 dict_correspondances = {
@@ -33,8 +34,8 @@ dict_correspondances = {
     "neutre": 0
 }
 
-data = util.get_all_tweets()
-# data = util.get_all_unique_tweets()
+# data = util.get_all_tweets()
+data = util.get_all_unique_tweets()
 
 tweets_polarity = {}
 
@@ -43,6 +44,7 @@ cpt_hashtags = 0
 cpt_emojis = 0
 cpt_quotes = 0
 cpt_other_words = 0
+cpt_other = 0
 
 cpt_positive = 0
 cpt_negative = 0
@@ -56,9 +58,10 @@ emojis_flag = True
 quotes_flag = True
 words_flag = True
 
-seuil_mots = 4
+seuil_mots = 2
 
 lemmatizer = spacy.load("fr_core_news_md")
+nlp = French()
 
 for tweet in data:
     print("Annotating tweet {}".format(tweet["_id"]))
@@ -71,14 +74,10 @@ for tweet in data:
     message_emojis = util.get_emojis(message)
 
     message_almost_clean = util.clean_message_keep_quotes(message)
-    message_clean = util.clean_message(message)
-
-    message_clean_splitted = message_clean.split()
-    message_clean_splitted = util.remove_elisions(message_clean_splitted)
+    message_clean = util.clean_message(message, lemmatizer, nlp)
+    message_clean = util.remove_elisions(message_clean)
 
     is_annotated = False
-
-    # TODO: caps
 
     ########### Quotes ###########
     if is_annotated is False:
@@ -88,12 +87,11 @@ for tweet in data:
                 tweet_polarity = "neutre"
                 is_annotated = True
                 cpt_quotes += 1
-                cpt_neutre += 1
 
     ########### Negative words ###########
     if is_annotated is False:
         if hand_annotated_words_lists_flag is True:
-            for mot in message_clean_splitted:
+            for mot in message_clean:
                 if mot in heavy_negatives_list or mot in mildly_heavy_negatives_list:
                     tweet_polarity = "negatif"
                     is_annotated = True
@@ -101,7 +99,6 @@ for tweet in data:
 
             if is_annotated is True:
                 cpt_neg_words += 1
-                cpt_negative += 1
 
     ########### Hashtags ###########
     if is_annotated is False:
@@ -120,13 +117,6 @@ for tweet in data:
                 is_annotated = True
                 cpt_hashtags += 1
 
-                if tweet_polarity == "negatif":
-                    cpt_negative += 1
-                elif tweet_polarity == "positif":
-                    cpt_positive += 1
-                else:
-                    cpt_neutre += 1
-
     ########### Emojis ###########
     if is_annotated is False:
         if emojis_flag is True:
@@ -141,16 +131,10 @@ for tweet in data:
                 is_annotated = True
                 cpt_emojis += 1
 
-                if tweet_polarity == "negatif":
-                    cpt_negative += 1
-                elif tweet_polarity == "positif":
-                    cpt_positive += 1
-
     ########### Mots ###########
     if is_annotated is False:
         if words_flag is True:
-            message_clean = message_clean_splitted
-            message_clean = util.lemmatize(message_clean, lemmatizer)
+            message_clean = util.lemmatize(message_clean, lemmatizer, nlp)
             score_message = 0  # Score global du message
             pos_mod = []  # Indicateur de modification positive du message
             neg_mod = []  # Indicateur de modification négative du message
@@ -159,7 +143,6 @@ for tweet in data:
             for mot in message_clean:
                 # On trouve le mot dans le dictionnaire FEEL
                 if dict_words.get(mot):
-                    print("word found: {}".format(mot))
                     new_score_message = score_message + int(dict_correspondances.get(dict_words.get(mot)))
 
                     # Si le nouveau score est plus élevé que l'ancien
@@ -173,24 +156,18 @@ for tweet in data:
                     score_message = new_score_message
 
             # Modifications du score dans les 2 sens
-            # TODO: check condition (plusieurs positifs/négatifs)
             if len(pos_mod) > 1 and len(neg_mod) > 1:
                 tweet_polarity = "mixte"
                 is_annotated = True
                 cpt_other_words += 1
                 cpt_mixte += 1
             # Modifications dans un sens + valeur absolue du score supérieure au seuil de prise en compte
-            else:
-            # elif len(pos_mod) == 0 or len(neg_mod) == 0:
+            # TODO : plus de poids aux négatifs
+            elif len(pos_mod) == 0 or len(neg_mod) == 0:
                 if abs(score_message) >= seuil_mots:
                     tweet_polarity = util.get_polarity_from_score(score_message)
                     is_annotated = True
                     cpt_other_words += 1
-
-                    if tweet_polarity == "negatif":
-                        cpt_negative += 1
-                    elif tweet_polarity == "positif":
-                        cpt_positive += 1
 
     if is_annotated is True:
         tweets_polarity[tweet['_id']] = tweet_polarity
@@ -202,19 +179,20 @@ for tweet in data:
         else:
             cpt_neutre += 1
 
-    # Condition du désespoir pour faire monter les perfs (annote tout le corpus non annoté en neutre)
     else:
         tweets_polarity[tweet['_id']] = "neutre"
+        cpt_other += 1
         cpt_neutre += 1
 
-total_annotated = cpt_neg_words + cpt_hashtags + cpt_emojis + cpt_quotes + cpt_other_words
+total_annotated = cpt_neg_words + cpt_hashtags + cpt_emojis + cpt_quotes + cpt_other_words + cpt_other
 
 print("Number of tweets annotated: {}".format(total_annotated))
-print("--- Number of tweets annotated thanks to negative words : {}".format(cpt_neg_words))
-print("--- Number of tweets annotated thanks to hashtags : {}".format(cpt_hashtags))
-print("--- Number of tweets annotated thanks to emojis : {}".format(cpt_emojis))
-print("--- Number of tweets annotated thanks to quotes : {}".format(cpt_quotes))
-print("--- Number of tweets annotated thanks to other words : {}".format(cpt_other_words))
+print("--- Number of tweets annotated thanks to negative words: {}".format(cpt_neg_words))
+print("--- Number of tweets annotated thanks to hashtags: {}".format(cpt_hashtags))
+print("--- Number of tweets annotated thanks to emojis: {}".format(cpt_emojis))
+print("--- Number of tweets annotated thanks to quotes: {}".format(cpt_quotes))
+print("--- Number of tweets annotated thanks to other words: {}".format(cpt_other_words))
+print("--- Number of tweets annotated by default: {}".format(cpt_other))
 
 print()
 
@@ -231,7 +209,3 @@ print("Number of neutral tweets: {}".format(cpt_neutre))
 
 with open('../common/data/annotated/apprentissage.json', 'w') as file:
     json.dump(tweets_polarity, file)
-
-################################ Notes:
-# Emojis seuls: très peu efficace. Problème: emojis avec doubles polarités (emoji qui pleure de rire par exemple).
-# Emojis + FEEL: peu efficace, trop de positifs

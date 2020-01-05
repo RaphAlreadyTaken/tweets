@@ -2,9 +2,11 @@ import json
 import os
 
 import numpy as np
+from keras import Sequential
 from keras.engine.saving import load_model
 
-from util import prepare_test_data_full
+from CorpusVectorization import get_model, latest_model
+from util import prepare_test_data
 
 
 def evaluate_all_models():
@@ -31,9 +33,18 @@ def evaluate_all_models():
                 output = []
 
                 for data in test_data:
-                    output_class = model.predict_classes(np.array([np.array(data["message"])]))
-                    output_class = classes.get(output_class[0])
-                    output.append([data["id"], output_class])
+                    if isinstance(model, Sequential):
+                        output_class = model.predict_classes(np.array([np.array(data["message"])]))
+                        output_class = classes.get(output_class[0])
+                        output.append([data["id"], output_class])
+                    else:
+                        data["message"] = np.expand_dims(np.array(data["message"]), axis=1)
+                        data["message"] = np.expand_dims(data["message"], axis=0)
+                        output_class = model.predict(data["message"])
+
+                        print(output_class[0])
+                        output_class = classes.get(list(output_class[0]).index(max(output_class[0])))
+                        output.append([data["id"], output_class])
 
                 with open(output_file, 'w', encoding="utf-8") as f:
                     for result in output:
@@ -48,7 +59,7 @@ def format_test_data():
             split_line = line.split(" ", 1)
             test_data.append({"_id": split_line[0], "message": split_line[1].rstrip()})
 
-    prepare_test_data_full(test_data)
+    prepare_test_data(test_data)
 
 
 if __name__ == '__main__':

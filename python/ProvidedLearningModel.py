@@ -16,15 +16,15 @@ from LearningModel import model_dir, dispatch_data
 
 warnings.filterwarnings("ignore")
 
-maxlen = 100  # Size of word embedding
+maxlen = 200  # Size of word embedding
 word_nb_feature_maps = 200
 hidden_size = 64
 conv = "1,2,3,4,5"
 
-sentence_input = Input(shape=(maxlen, ))
+sentence_input = Input(shape=(maxlen, 1, ))
 output_classes = to_categorical([0, 1, 2, 3], num_classes=4, dtype="int")
 
-x = Dense(100, input_dim=100, activation="relu")(sentence_input)
+x = Dense(200, input_dim=200, activation="relu")(sentence_input)
 x = Dropout(0.3)(x)
 
 xconv = []
@@ -50,7 +50,7 @@ model = Model(input=sentence_input, output=x)
 with open("../common/data/annotated/apprentissage.json", 'r') as f:
     polarites = json.load(f)
 
-with open("../common/data/trained/vectors_v2.json", 'r') as f:
+with open("../common/data/trained/vectors_v3.json", 'r') as f:
     data = json.load(f)
 
 actual_tweet_ids = [x for x in polarites.keys()]
@@ -60,13 +60,16 @@ data = [x for x in data if x["id"] in actual_tweet_ids]
 
 training_data, training_output = dispatch_data(data, polarites)
 
+# Rajout d'une dimension pour couche Convolutionnelle
+training_data = np.expand_dims(training_data, axis=2)
+
 model_training_time = time.time()
 
 # Callback ModelCheckpoint
 checkpoint = ModelCheckpoint("{}\\opti{}.hdf5".format(model_dir, model_training_time),
-                             monitor="val_categorical_accuracy",
+                             monitor="accuracy",
                              verbose=0, save_best_only=True, save_weights_only=False, mode="auto", period=1)
 
 optim = Adadelta(lr=1.0, rho=0.95, epsilon=1e-06)
 model.compile(loss="categorical_crossentropy", optimizer=optim, metrics=["accuracy"])
-model.fit(np.array(training_data), np.array(training_output), nb_epoch=50, batch_size=128, shuffle=True)
+model.fit(np.array(training_data), np.array(training_output), nb_epoch=50, batch_size=128, shuffle=True, callbacks=[checkpoint])
