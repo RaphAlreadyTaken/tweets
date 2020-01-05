@@ -15,23 +15,7 @@ polarity_map_output = {0: "negatif", 1: "positif", 2: "mixte", 3: "autre"}
 
 lemmatizer = spacy.load("fr_core_news_md")
 
-
-def clean_message(message):
-    # message_clean = util.clean_message_light(message)
-    # message_clean_splitted = message_clean.split()
-    # message_clean_splitted = util.remove_elisions(message_clean_splitted)
-    # message_clean = util.lemmatize(message_clean_splitted, lemmatizer)
-
-    message_almost_clean = util.clean_message_keep_quotes(message)
-    message_clean = util.clean_message(message)
-
-    message_clean_splitted = message_clean.split()
-    message_clean_splitted = util.remove_elisions(message_clean_splitted)
-    message_clean = message_clean_splitted
-    message_clean = util.lemmatize(message_clean, lemmatizer)
-
-    return message_clean
-
+nlp = French()
 
 def load_lexique_from_file():
     with open(lexique_filename, 'r', encoding="utf-8") as file:
@@ -46,13 +30,11 @@ def add_learning_corpus_to_lexique():
     # Filtrage des tweets inutiles
     filtered_tweets = util.get_filtered_tweets(tweets)
 
-    cpt = 0
-    for tweet in data:
-        message = tweet['_source']['message']
-        cpt += 1
-        print(cpt)
-        # Cleaning message
-        message_clean = clean_message(message)
+    lexique_dict = {}
+    lexique_size = 1
+
+    for tweet_key in filtered_tweets.keys():
+        message = filtered_tweets.get(tweet_key)
 
         for word in message:
             if lexique_dict.get(word) is None:
@@ -98,7 +80,6 @@ def message_to_svm_format(message):
     message_unique_words = set(message) #loop through unique elements
     for word in message_unique_words:
         if lexique_dict.get(word) is not None:
-            # print("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOPPPPEEEEE : " + str(word))
             dict_message[lexique_dict.get(word)] = message.count(word)
 
     # for entry in sorted(dict_message.keys()):
@@ -129,7 +110,7 @@ def learning_corpus_to_svm_format():
                 # get message only
                 tweet_message = tweet['_source']['message']
                 # Cleaning message
-                tweet_message_clean = clean_message(tweet_message)
+                tweet_message_clean = util.clean_message(tweet_message, lemmatizer, nlp)
                 # print(tweet_message_clean)
                 # to get progress
                 # print(annotated_tweet)
@@ -171,7 +152,6 @@ def svm_output_to_evaluation_platform_format(test_out_filename):
 
 
 if __name__ == '__main__':
-
     # Create lexicon
     # add_learning_corpus_to_lexique()
     # add_test_corpus_to_lexique()
@@ -183,7 +163,7 @@ if __name__ == '__main__':
     # test_corpus_to_svm_format()
 
     # Format svm output to use file on evaluation platform
-    # svm_output_to_evaluation_platform_format('../common/data/metrics/svm/out_svm.txt')
+    svm_output_to_evaluation_platform_format('../common/data/metrics/svm/out_svm.txt')
 
 
 # Train model: liblinear-2.30/train -c 4 -e 0.1 common/data/annotated/apprentissage_svm.svm python/models/svm/tweets.model
